@@ -1054,8 +1054,6 @@
             transform: translateY(0);
         }
 
-        /* جزئیات محصول */
-
         .details-modal {
             position: fixed;
             inset: 0;
@@ -1976,9 +1974,6 @@
 
 </div>
 
-
-<!-- پنجره مشخصات کامل -->
-
 <div
     class="details-modal"
     id="detailsModal"
@@ -2124,7 +2119,6 @@ const realProducts = [
             "شبکه":"4G / 5G",
             "سیستم‌عامل":"Android 15 / One UI 7",
             "مقاومت":"IP67",
-            "نمایشگر":"6.7 اینچ Super AMOLED، FHD+، 120Hz",
             "اتصالات":"Wi-Fi، Bluetooth، NFC، USB-C"
         }
     },
@@ -2907,6 +2901,159 @@ const realProducts = [
 ];
 
 
+/* 📱 29 موبایل جدید */
+
+realProducts.push(
+
+    ...[
+        "Samsung Galaxy S25",
+        "Samsung Galaxy S25+",
+        "Samsung Galaxy S25 Edge",
+        "Samsung Galaxy Z Flip 7",
+        "Samsung Galaxy Z Fold 7",
+        "iPhone 16 Plus",
+        "iPhone 16 Pro",
+        "iPhone 16 Pro Max",
+        "iPhone 17",
+        "iPhone 17 Air",
+        "iPhone 17 Pro",
+        "Google Pixel 9",
+        "Google Pixel 9 Pro",
+        "Google Pixel 9 Pro XL",
+        "OnePlus 13",
+        "OnePlus 13R",
+        "Xiaomi 15",
+        "Xiaomi 15 Pro",
+        "Xiaomi 15 Ultra",
+        "Xiaomi 14T",
+        "Xiaomi 14T Pro",
+        "POCO F7",
+        "POCO F7 Pro",
+        "HONOR Magic7 Pro",
+        "HONOR Magic V3",
+        "HONOR 400",
+        "HONOR 400 Pro",
+        "Nothing Phone (3)",
+        "OnePlus Nord 5"
+    ].map(name => ({
+        name:name.toLowerCase(),
+        brand:
+            name.toLowerCase().includes("samsung") ? "samsung" :
+            name.toLowerCase().includes("iphone") ? "apple" :
+            name.toLowerCase().includes("google") ? "google" :
+            name.toLowerCase().includes("oneplus") ? "oneplus" :
+            name.toLowerCase().includes("honor") ? "honor" : "xiaomi",
+        type:"mobile"
+    })),
+
+    /* 📲 20 تبلت جدید */
+
+    ...[
+        "Samsung Galaxy Tab S10 Ultra",
+        "Samsung Galaxy Tab S10+",
+        "Samsung Galaxy Tab S10",
+        "Samsung Galaxy Tab S9 Ultra",
+        "Samsung Galaxy Tab S9+",
+        "Samsung Galaxy Tab S9",
+        "Samsung Galaxy Tab A9",
+        "Samsung Galaxy Tab A9+",
+        "Apple iPad Pro 11 M5",
+        "Apple iPad Pro 13 M5",
+        "Apple iPad Air 11 M4",
+        "Apple iPad Air 13 M4",
+        "Apple iPad 11",
+        "Xiaomi Pad 7",
+        "Xiaomi Pad 7 Pro",
+        "Xiaomi Redmi Pad Pro",
+        "Lenovo Tab P12",
+        "Lenovo Tab M11",
+        "Microsoft Surface Pro 12",
+        "OnePlus Pad 2"
+    ].map(name => ({
+        name:name.toLowerCase(),
+        brand:
+            name.toLowerCase().includes("samsung") ? "samsung" :
+            name.toLowerCase().includes("apple") ||
+            name.toLowerCase().includes("ipad") ? "apple" :
+            name.toLowerCase().includes("microsoft") ? "microsoft" :
+            name.toLowerCase().includes("lenovo") ? "lenovo" :
+            name.toLowerCase().includes("oneplus") ? "oneplus" : "xiaomi",
+        type:"tablet"
+    })),
+
+    /* 💻 20 لپ‌تاپ جدید */
+
+    ...[
+        "Apple MacBook Air 13 M5",
+        "Apple MacBook Air 15 M5",
+        "Apple MacBook Pro 14 M5",
+        "Apple MacBook Pro 16 M5",
+        "ASUS ROG Zephyrus G16",
+        "ASUS ROG Strix G18",
+        "ASUS TUF Gaming A15",
+        "ASUS Vivobook 16",
+        "Lenovo Legion 5",
+        "Lenovo Legion 7",
+        "Lenovo LOQ 15",
+        "Lenovo ThinkPad E14",
+        "HP Victus 16",
+        "HP Omen 16",
+        "HP Pavilion 15",
+        "Dell XPS 13",
+        "Dell XPS 16",
+        "Dell Inspiron 15",
+        "Acer Nitro V 15",
+        "Microsoft Surface Laptop 7"
+    ].map(name => ({
+        name:name.toLowerCase(),
+        brand:
+            name.toLowerCase().includes("apple") ||
+            name.toLowerCase().includes("macbook") ? "apple" :
+            name.toLowerCase().includes("asus") ? "asus" :
+            name.toLowerCase().includes("lenovo") ? "lenovo" :
+            name.toLowerCase().includes("hp") ? "hp" :
+            name.toLowerCase().includes("microsoft") ? "microsoft" : "lenovo",
+        type:"laptop"
+    })),
+
+    /* 🎧 20 گجت جدید */
+
+    ...[
+        "Samsung Galaxy Watch 7",
+        "Samsung Galaxy Watch Ultra",
+        "Samsung Galaxy Buds3",
+        "Samsung Galaxy Buds3 Pro",
+        "Apple Watch Series 10",
+        "Apple Watch Ultra 2",
+        "AirPods 4",
+        "AirPods Pro 2",
+        "Google Pixel Watch 3",
+        "Google Pixel Buds Pro 2",
+        "Xiaomi Watch 2",
+        "Xiaomi Watch S4",
+        "Xiaomi Buds 5",
+        "Redmi Buds 6 Pro",
+        "OnePlus Watch 2",
+        "OnePlus Buds Pro 3",
+        "Honor Watch 5",
+        "Honor Earbuds 4 Pro",
+        "Nothing Ear",
+        "CMF Watch Pro 2"
+    ].map(name => ({
+        name:name.toLowerCase(),
+        brand:
+            name.toLowerCase().includes("samsung") ? "samsung" :
+            name.toLowerCase().includes("apple") ||
+            name.toLowerCase().includes("airpods") ? "apple" :
+            name.toLowerCase().includes("google") ? "google" :
+            name.toLowerCase().includes("oneplus") ? "oneplus" :
+            name.toLowerCase().includes("honor") ? "honor" : "xiaomi",
+        type:"gadget"
+    }))
+
+);
+
+
 const brandNames = {
 
     samsung: "samsung",
@@ -3373,7 +3520,7 @@ function openDetails(index) {
 
 
     detailsGrid.innerHTML =
-        Object.entries(product.specs)
+        Object.entries(product.specs || {})
         .map(function(item) {
 
             return `
@@ -3761,6 +3908,8 @@ document.getElementById(
     );
 
 
+/* اجرای اولیه */
+
 renderProducts();
 
 updateProducts();
@@ -3774,137 +3923,3 @@ filterProducts();
 </body>
 
 </html>
-
-
-<script>
-realProducts.push(
-
-/* 📱 29 موبایل جدید */
-...[
-"Samsung Galaxy S25","Samsung Galaxy S25+","Samsung Galaxy S25 Edge",
-"Samsung Galaxy Z Flip 7","Samsung Galaxy Z Fold 7",
-"iPhone 16 Plus","iPhone 16 Pro","iPhone 16 Pro Max",
-"iPhone 17","iPhone 17 Air","iPhone 17 Pro",
-"Google Pixel 9","Google Pixel 9 Pro","Google Pixel 9 Pro XL",
-"OnePlus 13","OnePlus 13R","Xiaomi 15","Xiaomi 15 Pro",
-"Xiaomi 15 Ultra","Xiaomi 14T","Xiaomi 14T Pro",
-"POCO F7","POCO F7 Pro","HONOR Magic7 Pro",
-"HONOR Magic V3","HONOR 400","HONOR 400 Pro",
-"Nothing Phone (3)","OnePlus Nord 5"
-].map(name => ({
-    name:name.toLowerCase(),
-    brand:
-        name.toLowerCase().includes("samsung") ? "samsung" :
-        name.toLowerCase().includes("iphone") ? "apple" :
-        name.toLowerCase().includes("google") ? "google" :
-        name.toLowerCase().includes("oneplus") ? "oneplus" :
-        name.toLowerCase().includes("honor") ? "honor" : "xiaomi",
-    type:"mobile"
-})),
-
-/* 📲 20 تبلت جدید */
-...[
-"Samsung Galaxy Tab S10 Ultra",
-"Samsung Galaxy Tab S10+",
-"Samsung Galaxy Tab S10",
-"Samsung Galaxy Tab S9 Ultra",
-"Samsung Galaxy Tab S9+",
-"Samsung Galaxy Tab S9",
-"Samsung Galaxy Tab A9",
-"Samsung Galaxy Tab A9+",
-"Apple iPad Pro 11 M5",
-"Apple iPad Pro 13 M5",
-"Apple iPad Air 11 M4",
-"Apple iPad Air 13 M4",
-"Apple iPad 11",
-"Xiaomi Pad 7",
-"Xiaomi Pad 7 Pro",
-"Xiaomi Redmi Pad Pro",
-"Lenovo Tab P12",
-"Lenovo Tab M11",
-"Microsoft Surface Pro 12",
-"OnePlus Pad 2"
-].map(name => ({
-    name:name.toLowerCase(),
-    brand:
-        name.toLowerCase().includes("samsung") ? "samsung" :
-        name.toLowerCase().includes("apple") || name.toLowerCase().includes("ipad") ? "apple" :
-        name.toLowerCase().includes("microsoft") ? "microsoft" :
-        name.toLowerCase().includes("lenovo") ? "lenovo" :
-        name.toLowerCase().includes("oneplus") ? "oneplus" : "xiaomi",
-    type:"tablet"
-})),
-
-/* 💻 20 لپ‌تاپ جدید */
-...[
-"Apple MacBook Air 13 M5",
-"Apple MacBook Air 15 M5",
-"Apple MacBook Pro 14 M5",
-"Apple MacBook Pro 16 M5",
-"ASUS ROG Zephyrus G16",
-"ASUS ROG Strix G18",
-"ASUS TUF Gaming A15",
-"ASUS Vivobook 16",
-"Lenovo Legion 5",
-"Lenovo Legion 7",
-"Lenovo LOQ 15",
-"Lenovo ThinkPad E14",
-"HP Victus 16",
-"HP Omen 16",
-"HP Pavilion 15",
-"Dell XPS 13",
-"Dell XPS 16",
-"Dell Inspiron 15",
-"Acer Nitro V 15",
-"Microsoft Surface Laptop 7"
-].map(name => ({
-    name:name.toLowerCase(),
-    brand:
-        name.toLowerCase().includes("apple") || name.toLowerCase().includes("macbook") ? "apple" :
-        name.toLowerCase().includes("asus") ? "asus" :
-        name.toLowerCase().includes("lenovo") ? "lenovo" :
-        name.toLowerCase().includes("hp") ? "hp" :
-        name.toLowerCase().includes("microsoft") ? "microsoft" : "lenovo",
-    type:"laptop"
-})),
-
-/* 🎧 20 گجت جدید */
-...[
-"Samsung Galaxy Watch 7",
-"Samsung Galaxy Watch Ultra",
-"Samsung Galaxy Buds3",
-"Samsung Galaxy Buds3 Pro",
-"Apple Watch Series 10",
-"Apple Watch Ultra 2",
-"AirPods 4",
-"AirPods Pro 2",
-"Google Pixel Watch 3",
-"Google Pixel Buds Pro 2",
-"Xiaomi Watch 2",
-"Xiaomi Watch S4",
-"Xiaomi Buds 5",
-"Redmi Buds 6 Pro",
-"OnePlus Watch 2",
-"OnePlus Buds Pro 3",
-"Honor Watch 5",
-"Honor Earbuds 4 Pro",
-"Nothing Ear",
-"CMF Watch Pro 2"
-].map(name => ({
-    name:name.toLowerCase(),
-    brand:
-        name.toLowerCase().includes("samsung") ? "samsung" :
-        name.toLowerCase().includes("apple") || name.toLowerCase().includes("airpods") ? "apple" :
-        name.toLowerCase().includes("google") ? "google" :
-        name.toLowerCase().includes("oneplus") ? "oneplus" :
-        name.toLowerCase().includes("honor") ? "honor" : "xiaomi",
-    type:"gadget"
-}))
-
-);
-
-renderProducts();
-updateProducts();
-loadFavorites();
-filterProducts();
-</script>
