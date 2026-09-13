@@ -1,2218 +1,3962 @@
-/* =========================================================
-   FLOWTECH ULTRA ENHANCEMENT PACK
-   فقط قابلیت‌های جدید — بدون حذف کد قبلی
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-(function () {
+<head>
+    <meta charset="UTF-8">
 
-    /* =====================================================
-       1. نام فارسی برندها و دسته‌بندی‌ها برای جست‌وجو
-       ===================================================== */
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    const persianSearchMap = {
+    <meta name="description"
+          content="فلوتِک؛ مرجع مشخصات و جدیدترین محصولات دیجیتال">
 
-        samsung: [
-            "سامسونگ",
-            "samsong",
-            "سامسونگ گلکسی",
-            "گلکسی"
-        ],
+    <meta name="theme-color"
+          content="#07141b">
 
-        apple: [
-            "اپل",
-            "آیفون",
-            "ایفون",
-            "آیپد",
-            "مک",
-            "مک بوک",
-            "اپل واچ",
-            "ایرپاد"
-        ],
+    <title>فلوتِک | مرجع تخصصی وسایل دیجیتالی</title>
 
-        xiaomi: [
-            "شیائومی",
-            "شیاومی",
-            "ردمی",
-            "پوکو",
-            "پوکـو"
-        ],
-
-        honor: [
-            "آنر",
-            "هونر"
-        ],
-
-        google: [
-            "گوگل",
-            "پیکسل"
-        ],
-
-        oneplus: [
-            "وان پلاس",
-            "وان‌پلاس",
-            "وانپلاس"
-        ],
-
-        microsoft: [
-            "مایکروسافت",
-            "سرفیس"
-        ],
-
-        lenovo: [
-            "لنوو"
-        ],
-
-        hp: [
-            "اچ پی",
-            "اچ‌پی",
-            "hp"
-        ],
-
-        asus: [
-            "ایسوس",
-            "راگ",
-            "rog"
-        ],
-
-        dell: [
-            "دل"
-        ],
-
-        acer: [
-            "ایسر"
-        ],
-
-        nothing: [
-            "ناتینگ"
-        ],
-
-        oppo: [
-            "اوپو"
-        ],
-
-        vivo: [
-            "ویوو"
-        ],
-
-        realme: [
-            "ریلمی"
-        ],
-
-        motorola: [
-            "موتورولا"
-        ],
-
-        huawei: [
-            "هواوی"
-        ],
-
-        sony: [
-            "سونی",
-            "اکسپریا"
-        ],
-
-        nintendo: [
-            "نینتندو"
-        ],
-
-        razer: [
-            "ریزر"
-        ],
-
-        logitech: [
-            "لاجیتک"
-        ],
-
-        anker: [
-            "انکر"
-        ]
-
-    };
-
-
-    const persianTypes = {
-
-        mobile: [
-            "موبایل",
-            "گوشی",
-            "گوشی موبایل",
-            "اسمارت فون",
-            "تلفن همراه"
-        ],
-
-        tablet: [
-            "تبلت",
-            "آیپد"
-        ],
-
-        laptop: [
-            "لپ تاپ",
-            "لپ‌تاپ",
-            "نوت بوک",
-            "لپتاب"
-        ],
-
-        gadget: [
-            "گجت",
-            "ماوس",
-            "موس",
-            "کیبورد",
-            "صفحه کلید",
-            "هدست",
-            "هدفون",
-            "هندزفری",
-            "ایرباد",
-            "پاوربانک",
-            "ساعت",
-            "اسمارت واچ",
-            "وبکم",
-            "اسپیکر",
-            "شارژر",
-            "هاب",
-            "کنترلر",
-            "دسته بازی"
-        ]
-
-    };
-
-
-    /* =====================================================
-       2. نرمال‌سازی جست‌وجوی فارسی و انگلیسی
-       ===================================================== */
-
-    function normalizeFlowText(text) {
-
-        return String(text || "")
-            .toLowerCase()
-
-            .replace(/ي/g, "ی")
-            .replace(/ى/g, "ی")
-            .replace(/ك/g, "ک")
-
-            .replace(/ۀ/g, "ه")
-            .replace(/ة/g, "ه")
-
-            .replace(/‌/g, "")
-            .replace(/\u200c/g, "")
-
-            .replace(/[ًٌٍَُِّْ]/g, "")
-
-            .replace(/ـ/g, "")
-
-            .replace(/[^\p{L}\p{N}\s.+-]/gu, " ")
-
-            .replace(/\s+/g, " ")
-
-            .trim();
-
-    }
-
-
-    function createPersianAliases(product) {
-
-        const aliases = [];
-
-        const brand = product.brand;
-
-        if (persianSearchMap[brand]) {
-
-            aliases.push(
-                ...persianSearchMap[brand]
-            );
-
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        if (persianTypes[product.type]) {
-
-            aliases.push(
-                ...persianTypes[product.type]
-            );
-
+        html {
+            scroll-behavior: smooth;
         }
 
-        return aliases.join(" ");
-
-    }
-
-
-    /* =====================================================
-       3. محصولات بسیار بیشتر
-       ===================================================== */
-
-    const extraMobileBrands = [
-
-        {
-            brand: "samsung",
-            names: [
-                "Galaxy A15",
-                "Galaxy A16",
-                "Galaxy A25",
-                "Galaxy A35",
-                "Galaxy A55",
-                "Galaxy S21",
-                "Galaxy S21+",
-                "Galaxy S21 Ultra",
-                "Galaxy S22",
-                "Galaxy S22+",
-                "Galaxy S22 Ultra",
-                "Galaxy S23",
-                "Galaxy S23+",
-                "Galaxy S23 Ultra",
-                "Galaxy S24",
-                "Galaxy S24+",
-                "Galaxy S24 Ultra",
-                "Galaxy S25",
-                "Galaxy S25+",
-                "Galaxy S25 Ultra",
-                "Galaxy Z Flip 5",
-                "Galaxy Z Flip 6",
-                "Galaxy Z Fold 5",
-                "Galaxy Z Fold 6",
-                "Galaxy M15",
-                "Galaxy M35",
-                "Galaxy M55"
-            ]
-        },
-
-        {
-            brand: "apple",
-            names: [
-                "iPhone 12",
-                "iPhone 12 Mini",
-                "iPhone 12 Pro",
-                "iPhone 12 Pro Max",
-                "iPhone 13",
-                "iPhone 13 Mini",
-                "iPhone 13 Pro",
-                "iPhone 13 Pro Max",
-                "iPhone 14",
-                "iPhone 14 Plus",
-                "iPhone 14 Pro",
-                "iPhone 14 Pro Max",
-                "iPhone 15",
-                "iPhone 15 Plus",
-                "iPhone 15 Pro",
-                "iPhone 15 Pro Max",
-                "iPhone 16",
-                "iPhone 16 Plus",
-                "iPhone 16 Pro",
-                "iPhone 16 Pro Max",
-                "iPhone 17",
-                "iPhone 17 Air",
-                "iPhone 17 Pro",
-                "iPhone 17 Pro Max"
-            ]
-        },
-
-        {
-            brand: "xiaomi",
-            names: [
-                "Xiaomi 12",
-                "Xiaomi 12 Pro",
-                "Xiaomi 13",
-                "Xiaomi 13 Pro",
-                "Xiaomi 13 Ultra",
-                "Xiaomi 14",
-                "Xiaomi 14 Pro",
-                "Xiaomi 14 Ultra",
-                "Xiaomi 15",
-                "Xiaomi 15 Pro",
-                "Xiaomi 15 Ultra",
-                "Redmi Note 12",
-                "Redmi Note 12 Pro",
-                "Redmi Note 13",
-                "Redmi Note 13 Pro",
-                "Redmi Note 13 Pro+",
-                "Redmi Note 14",
-                "Redmi Note 14 Pro",
-                "Redmi Note 14 Pro+",
-                "Redmi Note 15",
-                "Redmi Note 15 Pro",
-                "POCO X5",
-                "POCO X5 Pro",
-                "POCO X6",
-                "POCO X6 Pro",
-                "POCO X7",
-                "POCO X7 Pro",
-                "POCO F5",
-                "POCO F6",
-                "POCO F7"
-            ]
-        },
-
-        {
-            brand: "google",
-            names: [
-                "Pixel 7",
-                "Pixel 7 Pro",
-                "Pixel 8",
-                "Pixel 8 Pro",
-                "Pixel 8a",
-                "Pixel 9",
-                "Pixel 9 Pro",
-                "Pixel 9 Pro XL",
-                "Pixel 9a",
-                "Pixel 10",
-                "Pixel 10 Pro",
-                "Pixel 10 Pro XL"
-            ]
-        },
-
-        {
-            brand: "honor",
-            names: [
-                "Honor 90",
-                "Honor 90 Pro",
-                "Honor 100",
-                "Honor 100 Pro",
-                "Honor 200",
-                "Honor 200 Pro",
-                "Honor 300",
-                "Honor 300 Pro",
-                "Honor 400",
-                "Honor 400 Pro",
-                "Magic5 Pro",
-                "Magic6 Pro",
-                "Magic7 Pro",
-                "Magic V2",
-                "Magic V3",
-                "Magic V5"
-            ]
-        },
-
-        {
-            brand: "oneplus",
-            names: [
-                "OnePlus 10 Pro",
-                "OnePlus 11",
-                "OnePlus 11R",
-                "OnePlus 12",
-                "OnePlus 12R",
-                "OnePlus 13",
-                "OnePlus 13R",
-                "OnePlus Nord 3",
-                "OnePlus Nord 4",
-                "OnePlus Nord 5"
-            ]
-        },
-
-        {
-            brand: "oppo",
-            names: [
-                "OPPO Find X5",
-                "OPPO Find X5 Pro",
-                "OPPO Find X6",
-                "OPPO Find X6 Pro",
-                "OPPO Find X7",
-                "OPPO Find X7 Ultra",
-                "OPPO Reno 10",
-                "OPPO Reno 11",
-                "OPPO Reno 12",
-                "OPPO Reno 13",
-                "OPPO Reno 14"
-            ]
-        },
-
-        {
-            brand: "vivo",
-            names: [
-                "Vivo X80",
-                "Vivo X90",
-                "Vivo X90 Pro",
-                "Vivo X100",
-                "Vivo X100 Pro",
-                "Vivo X200",
-                "Vivo X200 Pro",
-                "Vivo V29",
-                "Vivo V30",
-                "Vivo V40",
-                "Vivo V50"
-            ]
-        },
-
-        {
-            brand: "motorola",
-            names: [
-                "Motorola Edge 30",
-                "Motorola Edge 40",
-                "Motorola Edge 50",
-                "Motorola Edge 60",
-                "Moto G54",
-                "Moto G64",
-                "Moto G84",
-                "Moto G85",
-                "Moto G75",
-                "Razr 40",
-                "Razr 50",
-                "Razr 60"
-            ]
-        }
-
-    ];
-
-
-    function genericSpecs(type, brand, name) {
-
-        if (type === "mobile") {
-
-            return {
-
-                "نمایشگر":
-                    "نمایشگر AMOLED / OLED با نرخ نوسازی بالا",
-
-                "پردازنده":
-                    "پردازنده چند هسته‌ای مناسب استفاده روزمره",
-
-                "رم":
-                    "8GB / 12GB بسته به نسخه",
-
-                "حافظه داخلی":
-                    "128GB / 256GB / 512GB بسته به نسخه",
-
-                "دوربین":
-                    "سیستم دوربین چندگانه",
-
-                "باتری":
-                    "باتری با ظرفیت بالا",
-
-                "شارژ":
-                    "پشتیبانی از شارژ سریع",
-
-                "شبکه":
-                    "4G / 5G",
-
-                "سیستم‌عامل":
-                    "Android",
-
-                "اتصالات":
-                    "Wi-Fi، Bluetooth، USB-C"
-
-            };
-
-        }
-
-
-        if (type === "tablet") {
-
-            return {
-
-                "نمایشگر":
-                    "نمایشگر بزرگ با وضوح بالا",
-
-                "پردازنده":
-                    "پردازنده چند هسته‌ای",
-
-                "رم":
-                    "6GB / 8GB / 12GB",
-
-                "حافظه داخلی":
-                    "128GB / 256GB / 512GB",
-
-                "دوربین":
-                    "دوربین اصلی و سلفی",
-
-                "باتری":
-                    "باتری بزرگ مخصوص تبلت",
-
-                "شارژ":
-                    "USB-C و شارژ سریع",
-
-                "سیستم‌عامل":
-                    "Android / iPadOS / Windows بسته به مدل",
-
-                "صدا":
-                    "اسپیکرهای استریو",
-
-                "اتصالات":
-                    "Wi-Fi، Bluetooth، USB-C"
-
-            };
-
-        }
-
-
-        if (type === "laptop") {
-
-            return {
-
-                "نمایشگر":
-                    "نمایشگر Full HD / QHD بسته به کانفیگ",
-
-                "پردازنده":
-                    "Intel Core / AMD Ryzen / Apple Silicon",
-
-                "رم":
-                    "8GB / 16GB / 32GB",
-
-                "حافظه داخلی":
-                    "256GB / 512GB / 1TB SSD",
-
-                "گرافیک":
-                    "گرافیک داخلی یا مجزا بسته به کانفیگ",
-
-                "باتری":
-                    "باتری داخلی",
-
-                "سیستم‌عامل":
-                    "Windows / macOS / ChromeOS",
-
-                "اتصالات":
-                    "Wi-Fi، Bluetooth، USB",
-
-                "پورت‌ها":
-                    "USB-A، USB-C، HDMI",
-
-                "کاربری":
-                    "روزمره، اداری، تحصیلی و حرفه‌ای"
-
-            };
-
-        }
-
-
-        return {
-
-            "نوع":
-                "گجت دیجیتال",
-
-            "نمایشگر":
-                "بسته به مدل",
-
-            "اتصال":
-                "Bluetooth / USB / Wireless",
-
-            "باتری":
-                "باتری داخلی یا منبع تغذیه",
-
-            "سازگاری":
-                "سازگار با دستگاه‌های دیجیتال",
-
-            "امکانات":
-                "قابلیت‌های هوشمند",
-
-            "طراحی":
-                "طراحی مدرن و قابل حمل"
-
-        };
-
-    }
-
-
-    function addGeneratedProduct(
-        name,
-        brand,
-        type
-    ) {
-
-        realProducts.push({
-
-            name:
-                name.toLowerCase(),
-
-            brand:
-                brand,
-
-            type:
-                type,
-
-            specs:
-                genericSpecs(
-                    type,
-                    brand,
-                    name
-                )
-
-        });
-
-    }
-
-
-    /* =====================================================
-       4. تکمیل موبایل تا 300 محصول جدید
-       ===================================================== */
-
-    let mobileAdded = 0;
-
-    extraMobileBrands.forEach(function(group) {
-
-        group.names.forEach(function(name) {
-
-            if (mobileAdded < 300) {
-
-                addGeneratedProduct(
-                    name,
-                    group.brand,
-                    "mobile"
-                );
-
-                mobileAdded++;
-
-            }
-
-        });
-
-    });
-
-
-    const mobileBrandPool = [
-
-        ["samsung", "Galaxy"],
-        ["apple", "iPhone"],
-        ["xiaomi", "Xiaomi"],
-        ["honor", "Honor"],
-        ["google", "Pixel"],
-        ["oneplus", "OnePlus"],
-        ["oppo", "OPPO"],
-        ["vivo", "Vivo"],
-        ["motorola", "Motorola"],
-        ["nothing", "Nothing"],
-        ["realme", "Realme"],
-        ["huawei", "Huawei"]
-
-    ];
-
-
-    let mobileSeries = 1;
-
-
-    while (mobileAdded < 300) {
-
-        const group =
-            mobileBrandPool[
-                (mobileAdded + 3)
-                %
-                mobileBrandPool.length
-            ];
-
-
-        addGeneratedProduct(
-
-            group[1]
-            +
-            " Series "
-            +
-            mobileSeries
-            +
-            " Pro",
-
-            group[0],
-
-            "mobile"
-
-        );
-
-
-        mobileAdded++;
-        mobileSeries++;
-
-    }
-
-
-    /* =====================================================
-       5. تولید 300 تبلت
-       ===================================================== */
-
-    const tabletPool = [
-
-        ["samsung", "Galaxy Tab"],
-        ["apple", "iPad"],
-        ["xiaomi", "Xiaomi Pad"],
-        ["lenovo", "Lenovo Tab"],
-        ["microsoft", "Surface Pro"],
-        ["oneplus", "OnePlus Pad"],
-        ["huawei", "Huawei MatePad"],
-        ["honor", "Honor Pad"],
-        ["asus", "ASUS Tablet"]
-
-    ];
-
-
-    let tabletAdded = 0;
-    let tabletNumber = 1;
-
-
-    while (tabletAdded < 300) {
-
-        const group =
-            tabletPool[
-                tabletAdded %
-                tabletPool.length
-            ];
-
-
-        addGeneratedProduct(
-
-            group[1]
-            +
-            " "
-            +
-            tabletNumber
-            +
-            " "
-            +
-            (
-                tabletNumber % 3 === 0
-                ? "Pro"
-                : tabletNumber % 3 === 1
-                    ? "Plus"
-                    : "Ultra"
-            ),
-
-            group[0],
-
-            "tablet"
-
-        );
-
-
-        tabletAdded++;
-        tabletNumber++;
-
-    }
-
-
-    /* =====================================================
-       6. تولید 300 لپ‌تاپ
-       ===================================================== */
-
-    const laptopPool = [
-
-        ["apple", "MacBook Air"],
-        ["apple", "MacBook Pro"],
-        ["asus", "ASUS Vivobook"],
-        ["asus", "ASUS ROG"],
-        ["asus", "ASUS TUF"],
-        ["lenovo", "Lenovo IdeaPad"],
-        ["lenovo", "Lenovo ThinkPad"],
-        ["lenovo", "Lenovo Legion"],
-        ["lenovo", "Lenovo LOQ"],
-        ["hp", "HP Victus"],
-        ["hp", "HP Omen"],
-        ["hp", "HP Pavilion"],
-        ["microsoft", "Surface Laptop"],
-        ["acer", "Acer Aspire"],
-        ["acer", "Acer Nitro"],
-        ["dell", "Dell Inspiron"],
-        ["dell", "Dell XPS"],
-        ["dell", "Dell G Series"]
-
-    ];
-
-
-    let laptopAdded = 0;
-    let laptopNumber = 1;
-
-
-    while (laptopAdded < 300) {
-
-        const group =
-            laptopPool[
-                laptopAdded %
-                laptopPool.length
-            ];
-
-
-        addGeneratedProduct(
-
-            group[1]
-            +
-            " "
-            +
-            laptopNumber
-            +
-            " "
-            +
-            (
-                laptopNumber % 4 === 0
-                ? "Pro"
-                : laptopNumber % 4 === 1
-                    ? "Plus"
-                    : laptopNumber % 4 === 2
-                        ? "Gaming"
-                        : "Ultra"
-            ),
-
-            group[0],
-
-            "laptop"
-
-        );
-
-
-        laptopAdded++;
-        laptopNumber++;
-
-    }
-
-
-    /* =====================================================
-       7. 400 گجت مختلف
-       ===================================================== */
-
-    const gadgetPool = [
-
-        ["logitech", "Logitech MX Master Mouse"],
-        ["logitech", "Logitech G Gaming Mouse"],
-        ["razer", "Razer DeathAdder Mouse"],
-        ["razer", "Razer Basilisk Mouse"],
-        ["samsung", "Samsung Galaxy Buds"],
-        ["apple", "Apple AirPods"],
-        ["sony", "Sony WH Headphones"],
-        ["sony", "Sony WF Earbuds"],
-        ["anker", "Anker PowerBank"],
-        ["xiaomi", "Xiaomi PowerBank"],
-        ["oneplus", "OnePlus Buds"],
-        ["honor", "Honor Earbuds"],
-        ["nothing", "Nothing Ear"],
-        ["google", "Pixel Buds"],
-        ["asus", "ASUS Gaming Headset"],
-        ["hp", "HP Wireless Headset"],
-        ["lenovo", "Lenovo Wireless Mouse"],
-        ["microsoft", "Microsoft Surface Mouse"],
-        ["samsung", "Samsung Smart Watch"],
-        ["xiaomi", "Xiaomi Smart Watch"],
-        ["apple", "Apple Watch"],
-        ["huawei", "Huawei Watch"],
-        ["nintendo", "Nintendo Controller"],
-        ["sony", "Sony Controller"],
-        ["razer", "Razer Keyboard"],
-        ["logitech", "Logitech Keyboard"],
-        ["asus", "ASUS Mechanical Keyboard"],
-        ["anker", "Anker Charger"],
-        ["xiaomi", "Xiaomi Charger"],
-        ["samsung", "Samsung Charger"],
-        ["apple", "Apple MagSafe Charger"],
-        ["sony", "Sony Portable Speaker"],
-        ["jbl", "JBL Bluetooth Speaker"],
-        ["anker", "Anker Bluetooth Speaker"],
-        ["logitech", "Logitech Webcam"],
-        ["razer", "Razer Webcam"],
-        ["anker", "Anker USB Hub"],
-        ["ugreen", "UGREEN USB Hub"],
-        ["baseus", "Baseus USB Hub"]
-
-    ];
-
-
-    let gadgetAdded = 0;
-    let gadgetNumber = 1;
-
-
-    while (gadgetAdded < 400) {
-
-        const group =
-            gadgetPool[
-                gadgetAdded %
-                gadgetPool.length
-            ];
-
-
-        addGeneratedProduct(
-
-            group[1]
-            +
-            " "
-            +
-            gadgetNumber,
-
-            group[0],
-
-            "gadget"
-
-        );
-
-
-        gadgetAdded++;
-        gadgetNumber++;
-
-    }
-
-
-    /* =====================================================
-       8. اضافه‌کردن برندهای جدید به فیلتر
-       ===================================================== */
-
-    const extraBrands = {
-
-        dell: "دل",
-        acer: "ایسر",
-        oppo: "اوپو",
-        vivo: "ویوو",
-        motorola: "موتورولا",
-        realme: "ریلمی",
-        huawei: "هواوی",
-        sony: "سونی",
-        nothing: "ناتینگ",
-        razer: "ریزر",
-        logitech: "لاجیتک",
-        anker: "انکر",
-        jbl: "جی‌بی‌ال",
-        ugreen: "یوگرین",
-        baseus: "بیسوس",
-        nintendo: "نینتندو"
-
-    };
-
-
-    Object.entries(extraBrands)
-        .forEach(function(item) {
-
-            if (
-                !Array.from(
-                    brandFilter.options
-                ).some(
-                    option =>
-                        option.value === item[0]
-                )
-            ) {
-
-                const option =
-                    document.createElement("option");
-
-                option.value =
-                    item[0];
-
-                option.textContent =
-                    item[1];
-
-                brandFilter.appendChild(
-                    option
-                );
-
-            }
-
-        });
-
-
-    /* =====================================================
-       9. جست‌وجوی حرفه‌ای فارسی + انگلیسی
-       ===================================================== */
-
-    function enhancedSearch() {
-
-        const rawSearch =
-            normalizeFlowText(
-                searchInput.value
-            );
-
-
-        const brand =
-            brandFilter.value;
-
-
-        const type =
-            typeFilter.value;
-
-
-        let visible = [];
-
-
-        products.forEach(function(card) {
-
-            const index =
-                Number(
-                    card
-                    .querySelector(
-                        ".details-button"
-                    )
-                    ?.dataset.index
-                );
-
-
-            const product =
-                realProducts[index];
-
-
-            if (!product) {
-                return;
-            }
-
-
-            const aliases =
-                createPersianAliases(
-                    product
-                );
-
-
-            const searchable =
-                normalizeFlowText(
-
-                    product.name
-                    +
-                    " "
-                    +
-                    aliases
-                    +
-                    " "
-                    +
-                    Object.keys(
-                        product.specs || {}
-                    ).join(" ")
-
-                );
-
-
-            const searchMatch =
-                !rawSearch
-                ||
-                searchable.includes(
-                    rawSearch
-                );
-
-
-            const brandMatch =
-                brand === "all"
-                ||
-                product.brand === brand;
-
-
-            const typeMatch =
-                type === "all"
-                ||
-                product.type === type;
-
-
-            if (
-                searchMatch &&
-                brandMatch &&
-                typeMatch
-            ) {
-
-                visible.push(card);
-
-            }
-
-        });
-
-
-        products.forEach(function(card) {
-
-            card.style.display =
-                "none";
-
-        });
-
-
-        visible.forEach(function(card) {
-
-            card.style.display =
-                "block";
-
-            productsGrid.appendChild(
-                card
-            );
-
-        });
-
-
-        resultCount.textContent =
-            new Intl.NumberFormat(
-                "fa-IR"
-            ).format(
-                visible.length
-            )
-            +
-            " محصول نمایش داده می‌شود";
-
-
-        noProducts.style.display =
-            visible.length
-            ? "none"
-            : "block";
-
-
-        loadFavorites();
-
-    }
-
-
-    searchInput.addEventListener(
-        "input",
-        enhancedSearch
-    );
-
-
-    brandFilter.addEventListener(
-        "change",
-        enhancedSearch
-    );
-
-
-    typeFilter.addEventListener(
-        "change",
-        enhancedSearch
-    );
-
-
-    /* =====================================================
-       10. پنل آماری حرفه‌ای
-       ===================================================== */
-
-    const statsBar =
-        document.createElement("div");
-
-
-    statsBar.className =
-        "ft-ultra-stats";
-
-
-    statsBar.innerHTML = `
-
-        <div class="ft-stat">
-            <strong id="ftTotalProducts">0</strong>
-            <span>محصول</span>
-        </div>
-
-        <div class="ft-stat">
-            <strong>4</strong>
-            <span>دسته اصلی</span>
-        </div>
-
-        <div class="ft-stat">
-            <strong id="ftBrandCount">0</strong>
-            <span>برند</span>
-        </div>
-
-        <div class="ft-stat">
-            <strong>∞</strong>
-            <span>جست‌وجوی سریع</span>
-        </div>
-
-    `;
-
-
-    const filterPanel =
-        document.querySelector(
-            ".filter-panel"
-        );
-
-
-    if (filterPanel) {
-
-        filterPanel.prepend(
-            statsBar
-        );
-
-    }
-
-
-    document.getElementById(
-        "ftTotalProducts"
-    ).textContent =
-        new Intl.NumberFormat(
-            "fa-IR"
-        ).format(
-            realProducts.length
-        );
-
-
-    document.getElementById(
-        "ftBrandCount"
-    ).textContent =
-        new Intl.NumberFormat(
-            "fa-IR"
-        ).format(
-            new Set(
-                realProducts.map(
-                    item => item.brand
-                )
-            ).size
-        );
-
-
-    /* =====================================================
-       11. دکمه حالت شب / نورانی
-       ===================================================== */
-
-    const visualButton =
-        document.createElement("button");
-
-
-    visualButton.className =
-        "ft-visual-toggle";
-
-
-    visualButton.textContent =
-        "✨";
-
-
-    visualButton.title =
-        "تغییر ظاهر سایت";
-
-
-    document.body.appendChild(
-        visualButton
-    );
-
-
-    visualButton.addEventListener(
-        "click",
-        function() {
-
-            document.body.classList.toggle(
-                "ft-cyber-mode"
-            );
-
-
-            localStorage.setItem(
-                "flowtechCyberMode",
-                document.body.classList.contains(
-                    "ft-cyber-mode"
-                )
-            );
-
-        }
-    );
-
-
-    if (
-        localStorage.getItem(
-            "flowtechCyberMode"
-        ) === "true"
-    ) {
-
-        document.body.classList.add(
-            "ft-cyber-mode"
-        );
-
-    }
-
-
-    /* =====================================================
-       12. نوار پیشرفت اسکرول
-       ===================================================== */
-
-    const progress =
-        document.createElement("div");
-
-
-    progress.className =
-        "ft-scroll-progress";
-
-
-    document.body.appendChild(
-        progress
-    );
-
-
-    window.addEventListener(
-        "scroll",
-        function() {
-
-            const scrollTop =
-                window.scrollY;
-
-
-            const height =
-                document.documentElement
-                .scrollHeight
-                -
-                window.innerHeight;
-
-
-            const percent =
-                height > 0
-                ? (scrollTop / height) * 100
-                : 0;
-
-
-            progress.style.width =
-                percent + "%";
-
-        }
-    );
-
-
-    /* =====================================================
-       13. جلوه موس
-       ===================================================== */
-
-    const cursorGlow =
-        document.createElement("div");
-
-
-    cursorGlow.className =
-        "ft-cursor-glow";
-
-
-    document.body.appendChild(
-        cursorGlow
-    );
-
-
-    document.addEventListener(
-        "mousemove",
-        function(event) {
-
-            cursorGlow.style.left =
-                event.clientX + "px";
-
-            cursorGlow.style.top =
-                event.clientY + "px";
-
-        }
-    );
-
-
-    /* =====================================================
-       14. انیمیشن کارت‌ها هنگام ورود
-       ===================================================== */
-
-    const observer =
-        new IntersectionObserver(
-
-            function(entries) {
-
-                entries.forEach(
-                    function(entry) {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target
-                                .classList
-                                .add(
-                                    "ft-visible"
-                                );
-
-                        }
-
-                    }
-                );
-
-            },
-
-            {
-                threshold: .08
-            }
-
-        );
-
-
-    function observeCards() {
-
-        document
-            .querySelectorAll(
-                ".product-card"
-            )
-            .forEach(function(card) {
-
-                observer.observe(
-                    card
-                );
-
-            });
-
-    }
-
-
-    /* =====================================================
-       15. CSS فوق‌العاده
-       ===================================================== */
-
-    const ultraStyle =
-        document.createElement("style");
-
-
-    ultraStyle.textContent = `
-
-        /* ================================================
-           ULTRA BACKGROUND
-           ================================================ */
-
-        body::before {
-
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            z-index: -2;
+        body {
+            font-family: Tahoma, Arial, sans-serif;
 
             background:
-
                 radial-gradient(
-                    circle at 15% 20%,
-                    rgba(0,229,255,.09),
-                    transparent 22%
+                    circle at 10% 10%,
+                    rgba(0,229,255,.08),
+                    transparent 30%
                 ),
-
                 radial-gradient(
-                    circle at 85% 70%,
-                    rgba(0,255,163,.07),
-                    transparent 24%
+                    circle at 90% 90%,
+                    rgba(0,255,163,.06),
+                    transparent 30%
                 ),
+                #07141b;
 
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(80,0,255,.05),
-                    transparent 25%
-                );
-
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
         }
 
-
-        body::after {
-
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            z-index: -1;
-
-            opacity: .13;
-
-            background-image:
-
-                linear-gradient(
-                    rgba(255,255,255,.035) 1px,
-                    transparent 1px
-                ),
-
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.035) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                45px 45px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent
-                );
-
-        }
-
-
-        /* ================================================
-           STATS
-           ================================================ */
-
-        .ft-ultra-stats {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4,1fr);
-
-            gap: 10px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .ft-stat {
-
-            position: relative;
-
-            padding: 17px 12px;
-
-            text-align: center;
-
-            border-radius: 16px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(0,229,255,.07),
-                    rgba(255,255,255,.025)
-                );
-
-            border:
-                1px solid
-                rgba(0,229,255,.11);
-
+        body.menu-open {
             overflow: hidden;
-
-            transition:
-                .3s ease;
-
         }
 
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-        .ft-stat::before {
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
 
-            content: "";
+        button {
+            border: none;
+        }
 
-            position: absolute;
+        ::selection {
+            background: #00e5ff;
+            color: #06141a;
+        }
 
-            width: 70px;
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
 
-            height: 70px;
+        ::-webkit-scrollbar-track {
+            background: #07141b;
+        }
 
-            border-radius: 50%;
+        ::-webkit-scrollbar-thumb {
+            background:
+                linear-gradient(
+                    #00e5ff,
+                    #00ffa3
+                );
+            border-radius: 20px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
 
             background:
-                #00e5ff;
+                rgba(7,20,27,.82);
 
-            opacity: .06;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
 
-            top: -35px;
-
-            right: -25px;
-
-            filter: blur(5px);
-
-        }
-
-
-        .ft-stat:hover {
-
-            transform:
-                translateY(-4px);
-
-            border-color:
-                rgba(0,229,255,.35);
-
-            box-shadow:
-                0 12px 35px
-                rgba(0,229,255,.08);
-
-        }
-
-
-        .ft-stat strong {
-
-            display: block;
-
-            color:
-                #00e5ff;
-
-            font-size:
-                20px;
-
-            font-weight:
-                900;
-
-        }
-
-
-        .ft-stat span {
-
-            display: block;
-
-            color:
-                #789098;
-
-            font-size:
-                10px;
-
-            margin-top:
-                2px;
-
-        }
-
-
-        /* ================================================
-           VISUAL BUTTON
-           ================================================ */
-
-        .ft-visual-toggle {
-
-            position: fixed;
-
-            left: 22px;
-
-            bottom: 78px;
-
-            width: 43px;
-
-            height: 43px;
-
-            border-radius: 13px;
-
-            background:
-                rgba(10,35,43,.92);
-
-            color:
-                #00e5ff;
-
-            border:
+            border-bottom:
                 1px solid
-                rgba(0,229,255,.2);
-
-            cursor:
-                pointer;
-
-            z-index:
-                850;
-
-            font-size:
-                18px;
-
-            box-shadow:
-                0 10px 35px
-                rgba(0,0,0,.3);
-
-            transition:
-                .3s;
-
+                rgba(255,255,255,.07);
         }
 
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            min-height: 78px;
+            padding: 12px 25px;
 
-        .ft-visual-toggle:hover {
-
-            transform:
-                rotate(20deg)
-                scale(1.08);
-
-            box-shadow:
-                0 0 30px
-                rgba(0,229,255,.2);
-
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
 
-        /* ================================================
-           SCROLL PROGRESS
-           ================================================ */
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 14px;
 
-        .ft-scroll-progress {
-
-            position:
-                fixed;
-
-            top:
-                0;
-
-            right:
-                0;
-
-            width:
-                0%;
-
-            height:
-                3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             background:
                 linear-gradient(
-                    90deg,
+                    135deg,
                     #00e5ff,
                     #00ffa3
                 );
 
+            color: #06141a;
+            font-size: 18px;
+            font-weight: 900;
+
             box-shadow:
-                0 0 15px
-                rgba(0,229,255,.6);
-
-            z-index:
-                5000;
-
-            transition:
-                width .08s linear;
-
+                0 0 25px
+                rgba(0,229,255,.18);
         }
 
+        .logo-text {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: .2px;
+            white-space: nowrap;
+        }
 
-        /* ================================================
-           CURSOR GLOW
-           ================================================ */
+        .logo-text span {
+            color: #00e5ff;
+        }
 
-        .ft-cursor-glow {
+        .nav-links {
+            list-style: none;
 
-            position:
-                fixed;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
 
-            width:
-                220px;
+        .nav-links a {
+            color: #b8cbd1;
+            font-size: 13px;
+            transition: .25s;
+        }
 
-            height:
-                220px;
+        .nav-links a:hover {
+            color: #00e5ff;
+        }
 
-            border-radius:
-                50%;
-
-            pointer-events:
-                none;
-
-            transform:
-                translate(-50%,-50%);
+        .nav-cta {
+            padding: 10px 16px;
+            border-radius: 12px;
 
             background:
-                radial-gradient(
-                    circle,
-                    rgba(0,229,255,.08),
-                    transparent 68%
+                linear-gradient(
+                    135deg,
+                    #00e5ff,
+                    #00ffa3
                 );
 
-            z-index:
-                -1;
-
+            color: #06141a !important;
+            font-weight: bold;
         }
 
+        .menu-button {
+            display: none;
 
-        /* ================================================
-           PRODUCT CARDS
-           ================================================ */
-
-        .product-card {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            transition:
-                transform .35s ease,
-                border-color .35s ease,
-                box-shadow .35s ease;
-
-        }
-
-
-        .product-card::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                170px;
-
-            height:
-                170px;
-
-            border-radius:
-                50%;
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
 
             background:
-                #00e5ff;
+                rgba(255,255,255,.06);
 
-            opacity:
-                0;
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
-            filter:
-                blur(75px);
-
-            top:
-                -80px;
-
-            left:
-                -80px;
-
-            transition:
-                .4s;
-
-            pointer-events:
-                none;
-
+            color: white;
+            cursor: pointer;
+            font-size: 21px;
         }
 
+        .hero {
+            max-width: 1250px;
+            min-height: 680px;
+            margin: auto;
+            padding: 80px 25px;
 
-        .product-card:hover::before {
-
-            opacity:
-                .13;
-
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 60px;
         }
 
+        .hero-content {
+            animation: fadeUp .8s ease both;
+        }
 
-        .product-card:hover {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
 
-            transform:
-                translateY(-10px)
-                scale(1.01);
+            padding: 8px 14px;
+            margin-bottom: 20px;
+            border-radius: 50px;
+
+            background:
+                rgba(0,229,255,.07);
+
+            border:
+                1px solid
+                rgba(0,229,255,.16);
+
+            color: #00e5ff;
+            font-size: 12px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px,6vw,76px);
+            line-height: 1.15;
+            margin-bottom: 23px;
+        }
+
+        .hero h1 span {
+            color: #00e5ff;
+            display: inline-block;
+            font-weight: 900;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #9fb4bb;
+            font-size: 16px;
+            line-height: 2;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .primary-button,
+        .secondary-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 14px 22px;
+            border-radius: 14px;
+
+            transition: .3s;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .primary-button {
+            background:
+                linear-gradient(
+                    135deg,
+                    #00e5ff,
+                    #00ffa3
+                );
+
+            color: #06141a;
+            font-weight: bold;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-4px);
 
             box-shadow:
-                0 25px 65px
-                rgba(0,0,0,.38),
-                0 0 35px
-                rgba(0,229,255,.05);
-
+                0 15px 35px
+                rgba(0,229,255,.18);
         }
 
+        .secondary-button {
+            background:
+                rgba(255,255,255,.045);
 
-        .product-card.ft-visible {
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            color: #ffffff;
+        }
+
+        .secondary-button:hover {
+            background:
+                rgba(255,255,255,.08);
+
+            transform: translateY(-3px);
+        }
+
+        .tech-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
 
             animation:
-                ftCardAppear .55s ease both;
-
+                floating 4s ease-in-out infinite;
         }
 
+        .glow {
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
 
-        @keyframes ftCardAppear {
-
-            from {
-
-                opacity:
-                    0;
-
-                transform:
-                    translateY(25px)
-                    scale(.97);
-
-            }
-
-            to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
+            background: #00e5ff;
+            opacity: .12;
+            filter: blur(90px);
         }
 
-
-        /* ================================================
-           SEARCH BOX
-           ================================================ */
-
-        .search-box input {
+        .phone {
+            width: 245px;
+            height: 480px;
+            padding: 9px;
+            border-radius: 39px;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(0,0,0,.3),
-                    rgba(0,229,255,.025)
+                    #344b54,
+                    #0b171d
                 );
 
-        }
-
-
-        .search-box input::placeholder {
-
-            color:
-                #668089;
-
-        }
-
-
-        .search-box input:focus {
-
-            transform:
-                translateY(-1px);
-
-            border-color:
-                #00e5ff;
+            border:
+                2px solid
+                rgba(255,255,255,.13);
 
             box-shadow:
-                0 0 0 3px
-                rgba(0,229,255,.05),
-                0 0 35px
-                rgba(0,229,255,.08);
-
+                0 35px 80px
+                rgba(0,0,0,.6);
         }
 
+        .phone-screen {
+            height: 100%;
+            width: 100%;
+            border-radius: 31px;
 
-        /* ================================================
-           FILTER PANEL
-           ================================================ */
-
-        .filter-panel {
-
-            box-shadow:
-                0 25px 80px
-                rgba(0,0,0,.18);
-
-            backdrop-filter:
-                blur(15px);
-
-        }
-
-
-        /* ================================================
-           BUTTONS
-           ================================================ */
-
-        .product-button,
-        .primary-button,
-        .secondary-button {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-        }
-
-
-        .product-button::after,
-        .primary-button::after,
-        .secondary-button::after {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            top:
-                0;
-
-            left:
-                -120%;
-
-            width:
-                80%;
-
-            height:
-                100%;
-
-            transform:
-                skewX(-20deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
             background:
-                rgba(255,255,255,.16);
-
-            transition:
-                .45s;
-
+                radial-gradient(
+                    circle at 50% 25%,
+                    #0b5968,
+                    transparent 35%
+                ),
+                linear-gradient(
+                    160deg,
+                    #071f29,
+                    #061116
+                );
         }
 
-
-        .product-button:hover::after,
-        .primary-button:hover::after,
-        .secondary-button:hover::after {
-
-            left:
-                130%;
-
+        .phone-logo {
+            font-size: 48px;
+            font-weight: 900;
+            color: #00e5ff;
         }
 
-
-        /* ================================================
-           HERO
-           ================================================ */
-
-        .hero {
-
-            position:
-                relative;
-
+        .phone-name {
+            color: #d2e0e4;
+            margin-top: 3px;
+            font-size: 14px;
         }
 
-
-        .hero::before {
-
-            content:
-                "FLOWTECH";
-
-            position:
-                absolute;
-
-            font-size:
-                clamp(80px,15vw,200px);
-
-            font-weight:
-                900;
-
-            color:
-                rgba(255,255,255,.018);
-
-            left:
-                0;
-
-            top:
-                50%;
-
-            transform:
-                translateY(-50%);
-
-            pointer-events:
-                none;
-
-            white-space:
-                nowrap;
-
+        .section {
+            max-width: 1250px;
+            margin: auto;
+            padding: 80px 25px;
         }
 
-
-        .phone {
-
-            box-shadow:
-                0 40px 100px
-                rgba(0,0,0,.7),
-                0 0 45px
-                rgba(0,229,255,.07);
-
+        .section-title {
+            text-align: center;
+            margin-bottom: 42px;
         }
 
-
-        /* ================================================
-           MODAL
-           ================================================ */
-
-        .details-box {
-
-            box-shadow:
-                0 35px 120px
-                rgba(0,0,0,.75),
-                0 0 50px
-                rgba(0,229,255,.07);
-
+        .section-title h2 {
+            font-size: 37px;
+            margin-bottom: 9px;
         }
 
-
-        .detail-item {
-
-            transition:
-                .25s;
-
+        .section-title h2 span {
+            color: #00e5ff;
         }
 
+        .section-title p {
+            color: #8299a1;
+            font-size: 13px;
+        }
 
-        .detail-item:hover {
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 18px;
+        }
 
-            transform:
-                translateY(-2px);
+        .category-card {
+            padding: 28px 20px;
+            text-align: center;
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            transition: .3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-7px);
 
             border-color:
-                rgba(0,229,255,.2);
+                rgba(0,229,255,.28);
+
+            background:
+                rgba(0,229,255,.045);
+        }
+
+        .category-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .category-card p {
+            color: #8299a1;
+            font-size: 12px;
+        }
+
+        .filter-panel {
+            padding: 23px;
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            margin-bottom: 30px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 50px;
+
+            padding: 0 45px 0 15px;
+            border-radius: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            outline: none;
+
+            background:
+                rgba(0,0,0,.22);
+
+            color: white;
+            font-size: 13px;
+            transition: .25s;
+        }
+
+        .search-box input:focus {
+            border-color:
+                rgba(0,229,255,.55);
+
+            box-shadow:
+                0 0 20px
+                rgba(0,229,255,.06);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .filter-select {
+            width: 100%;
+            height: 50px;
+
+            padding: 0 13px;
+            border-radius: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            background: #10242d;
+            color: white;
+            outline: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .filter-select option {
+            background: #10242d;
+            color: white;
+        }
+
+        .filter-info {
+            margin-top: 17px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-count {
+            color: #849ba2;
+            font-size: 12px;
+        }
+
+        .clear-filters {
+            padding: 8px 14px;
+            border-radius: 10px;
+
+            background:
+                rgba(255,75,75,.08);
+
+            border:
+                1px solid
+                rgba(255,75,75,.15);
+
+            color: #ffaaaa;
+            cursor: pointer;
+            font-size: 11px;
+            transition: .25s;
+        }
+
+        .clear-filters:hover {
+            background:
+                rgba(255,75,75,.15);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            position: relative;
+            padding: 23px;
+            border-radius: 23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.018)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            transition:
+                transform .3s,
+                border-color .3s;
+
+            animation:
+                cardIn .5s ease both;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(0,229,255,.3);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,.25);
+        }
+
+        .product-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .product-icon {
+            width: 66px;
+            height: 66px;
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(0,229,255,.07);
+
+            border:
+                1px solid
+                rgba(0,229,255,.12);
+
+            font-size: 34px;
+        }
+
+        .product-tags {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .tag {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 9px;
+        }
+
+        .tag-new {
+            color: #00e5ff;
+
+            background:
+                rgba(0,229,255,.08);
+
+            border:
+                1px solid
+                rgba(0,229,255,.12);
+        }
+
+        .tag-hot {
+            color: #ffd36a;
+
+            background:
+                rgba(255,190,50,.08);
+
+            border:
+                1px solid
+                rgba(255,190,50,.12);
+        }
+
+        .product-brand {
+            display: inline-block;
+            margin-top: 17px;
+            padding: 4px 9px;
+            border-radius: 20px;
+
+            background:
+                rgba(0,255,163,.07);
+
+            color: #00ffa3;
+            font-size: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 19px;
+            margin: 9px 0 3px;
+            word-break: break-word;
+        }
+
+        .product-type {
+            color: #708890;
+            font-size: 11px;
+            margin-bottom: 14px;
+        }
+
+        .product-specs {
+            list-style: none;
+            padding-top: 13px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.07);
+
+            margin-bottom: 17px;
+        }
+
+        .product-specs li {
+            color: #9db1b7;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .product-specs li::before {
+            content: "✓";
+            color: #00e5ff;
+            margin-left: 7px;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .product-button {
+            padding: 9px 12px;
+            border-radius: 10px;
+
+            background:
+                rgba(0,229,255,.08);
+
+            border:
+                1px solid
+                rgba(0,229,255,.14);
+
+            color: #00e5ff;
+            font-size: 10px;
+            cursor: pointer;
+            transition: .25s;
+            flex: 1;
+        }
+
+        .product-button:hover {
+            background:
+                rgba(0,229,255,.15);
+        }
+
+        .details-button {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,229,255,.14),
+                    rgba(0,255,163,.08)
+                );
+        }
+
+        .favorite-button {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color: #849ba2;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .25s;
+        }
+
+        .favorite-button.active {
+            color: #ff6680;
+
+            background:
+                rgba(255,70,100,.1);
+
+            border-color:
+                rgba(255,70,100,.2);
+        }
+
+        .no-products {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .no-products-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .no-products h3 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .no-products p {
+            color: #71868f;
+            font-size: 12px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 28px;
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            transition: .3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(0,229,255,.25);
+        }
+
+        .feature-number {
+            color: #00e5ff;
+            font-size: 11px;
+            margin-bottom: 13px;
+        }
+
+        .feature h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #81969d;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .info-box {
+            padding: 45px 30px;
+            text-align: center;
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,229,255,.07),
+                    rgba(0,255,163,.035)
+                );
+
+            border:
+                1px solid
+                rgba(0,229,255,.13);
+        }
+
+        .info-box p {
+            max-width: 760px;
+            margin: 0 auto 25px;
+
+            color: #9db1b7;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .cta {
+            max-width: 1050px;
+            margin: 50px auto 80px;
+            padding: 70px 25px;
+            text-align: center;
+            border-radius: 35px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,229,255,.12),
+                    transparent 65%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .cta h2 {
+            font-size: clamp(28px,5vw,42px);
+            margin-bottom: 12px;
+        }
+
+        .cta h2 span {
+            color: #00e5ff;
+        }
+
+        .cta p {
+            color: #82979e;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        footer {
+            border-top:
+                1px solid
+                rgba(255,255,255,.07);
+
+            padding: 35px 20px;
+            text-align: center;
+
+            background:
+                rgba(0,0,0,.15);
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 7px;
+        }
+
+        .footer-logo span {
+            color: #00e5ff;
+        }
+
+        footer p {
+            color: #657a81;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .last-update {
+            color: #00e5ff;
+            font-size: 10px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 22px;
+            left: 22px;
+
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00e5ff,
+                    #00ffa3
+                );
+
+            color: #06141a;
+            font-size: 20px;
+            cursor: pointer;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(10px);
+            transition: .3s;
+            z-index: 900;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+
+            padding: 12px 18px;
+            border-radius: 13px;
+
+            background: #102831;
+
+            border:
+                1px solid
+                rgba(0,229,255,.18);
+
+            color: #dcecef;
+            font-size: 11px;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            pointer-events: none;
+            transition: .3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .details-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,0,0,.72);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition: .25s;
+        }
+
+        .details-modal.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .details-box {
+            width: min(850px,100%);
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 28px;
+
+            border-radius: 27px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #102831,
+                    #07171e
+                );
+
+            border:
+                1px solid
+                rgba(0,229,255,.18);
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,.6);
+
+            transform: translateY(20px) scale(.98);
+            transition: .3s;
+        }
+
+        .details-modal.active .details-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+        .details-title {
+            font-size: 25px;
+            line-height: 1.5;
+        }
+
+        .details-subtitle {
+            color: #00e5ff;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .close-details {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.06);
+
+            border:
+                1px solid
+                rgba(255,255,255,.09);
+
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .close-details:hover {
+            background:
+                rgba(255,70,70,.12);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 10px;
+        }
+
+        .detail-item {
+            padding: 13px 15px;
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+        .detail-label {
+            display: block;
+            color: #6f8991;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            color: #e2f0f3;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .details-note {
+            margin-top: 18px;
+            padding: 13px 15px;
+            border-radius: 13px;
+
+            color: #829da5;
 
             background:
                 rgba(0,229,255,.045);
 
+            border:
+                1px solid
+                rgba(0,229,255,.09);
+
+            font-size: 10px;
+            line-height: 1.9;
         }
 
-
-        /* ================================================
-           CYBER MODE
-           ================================================ */
-
-        body.ft-cyber-mode {
-
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(0,255,163,.13),
-                    transparent 25%
-                ),
-                radial-gradient(
-                    circle at 80% 80%,
-                    rgba(0,229,255,.13),
-                    transparent 25%
-                ),
-                #050d12;
-
-        }
-
-
-        body.ft-cyber-mode .product-card:hover {
-
-            border-color:
-                rgba(0,255,163,.4);
-
-            box-shadow:
-                0 25px 70px
-                rgba(0,0,0,.45),
-                0 0 35px
-                rgba(0,255,163,.07);
-
-        }
-
-
-        body.ft-cyber-mode .ft-scroll-progress {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #00ffa3,
-                    #00e5ff
-                );
-
-        }
-
-
-        /* ================================================
-           MOBILE
-           ================================================ */
-
-        @media (max-width:650px) {
-
-            .ft-ultra-stats {
-
-                grid-template-columns:
-                    repeat(2,1fr);
-
+        @keyframes floating {
+            0%,100% {
+                transform: translateY(0);
             }
 
-
-            .ft-stat strong {
-
-                font-size:
-                    17px;
-
+            50% {
+                transform: translateY(-14px);
             }
-
-
-            .ft-cursor-glow {
-
-                display:
-                    none;
-
-            }
-
-
-            .ft-visual-toggle {
-
-                left:
-                    18px;
-
-                bottom:
-                    75px;
-
-            }
-
         }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1000px) {
+
+            .nav-links {
+                gap: 13px;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 11px 17px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 78px;
+                right: -100%;
+
+                width: 100%;
+                height: calc(100vh - 78px);
+
+                padding: 30px 25px;
+
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 5px;
+
+                background:
+                    rgba(7,20,27,.97);
+
+                backdrop-filter: blur(20px);
+                transition: .35s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 14px;
+                border-radius: 12px;
+                text-align: center;
+            }
+
+            .nav-cta {
+                margin-top: 8px;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .hero {
+                padding: 55px 18px;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero p {
+                font-size: 13px;
+            }
+
+            .phone {
+                width: 205px;
+                height: 400px;
+            }
+
+            .section {
+                padding: 60px 18px;
+            }
+
+            .section-title h2 {
+                font-size: 29px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .clear-filters {
+                width: 100%;
+            }
+
+            .info-box {
+                padding: 30px 18px;
+            }
+
+            .cta {
+                margin: 30px 18px 60px;
+                padding: 55px 18px;
+            }
+
+            .toast {
+                left: 20px;
+                right: 20px;
+                text-align: center;
+            }
+
+            .product-footer {
+                align-items: flex-end;
+            }
+
+            .product-actions {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .details-box {
+                padding: 20px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+        <a href="#home" class="logo">
+            <div class="logo-icon">
+                FT
+            </div>
+
+            <div class="logo-text">
+                <span>فلوت</span>ِک
+            </div>
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="باز کردن منو">
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+
+            <li>
+                <a href="#home">خانه</a>
+            </li>
+
+            <li>
+                <a href="#categories">دسته‌بندی‌ها</a>
+            </li>
+
+            <li>
+                <a href="#products">محصولات</a>
+            </li>
+
+            <li>
+                <a href="#features">امکانات</a>
+            </li>
+
+            <li>
+                <a href="#about">درباره فلوتِک</a>
+            </li>
+
+            <li>
+                <a
+                    href="https://ble.ir/flowtech"
+                    target="_blank"
+                    rel="noopener"
+                    class="nav-cta">
+                    کانال فلوتِک
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚡ دنیای به‌روز تکنولوژی
+        </div>
+
+        <h1>
+            به دنیای
+            <br>
+            <span>فلوتِک</span>
+            خوش آمدید
+        </h1>
+
+        <p>
+            مرجع معرفی مشخصات و جدیدترین
+            محصولات دیجیتال؛ از موبایل و تبلت
+            گرفته تا لپ‌تاپ، گجت و تجهیزات
+            تکنولوژی.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#products"
+                class="primary-button">
+                🔎 مشاهده محصولات
+            </a>
+
+            <a
+                href="https://ble.ir/flowtech"
+                target="_blank"
+                rel="noopener"
+                class="secondary-button">
+                🚀 ورود به کانال
+            </a>
+
+        </div>
+    </div>
+
+    <div class="tech-display">
+
+        <div class="glow"></div>
+
+        <div class="phone">
+
+            <div class="phone-screen">
+
+                <div>
+
+                    <div class="phone-logo">
+                        FT
+                    </div>
+
+                    <div class="phone-name">
+                        فلوتِک
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section
+    class="section"
+    id="categories">
+
+    <div class="section-title">
+
+        <h2>
+            دسته‌بندی‌های
+            <span>فلوتِک</span>
+        </h2>
+
+        <p>
+            محصول مورد علاقه‌ات را سریع پیدا کن
+        </p>
+
+    </div>
+
+    <div class="categories">
+
+        <div class="category-card">
+
+            <div class="category-icon">📱</div>
+
+            <h3>موبایل</h3>
+
+            <p>
+                گوشی‌های هوشمند و پرچمدار
+            </p>
+
+        </div>
+
+        <div class="category-card">
+
+            <div class="category-icon">📲</div>
+
+            <h3>تبلت</h3>
+
+            <p>
+                تبلت‌های جدید و حرفه‌ای
+            </p>
+
+        </div>
+
+        <div class="category-card">
+
+            <div class="category-icon">💻</div>
+
+            <h3>لپ‌تاپ</h3>
+
+            <p>
+                لپ‌تاپ‌های قدرتمند
+            </p>
+
+        </div>
+
+        <div class="category-card">
+
+            <div class="category-icon">🎧</div>
+
+            <h3>گجت</h3>
+
+            <p>
+                لوازم و تجهیزات دیجیتال
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section
+    class="section"
+    id="products">
+
+    <div class="section-title">
+
+        <h2>
+            محصولات
+            <span>دیجیتال</span>
+        </h2>
+
+        <p>
+            جست‌وجو، فیلتر و مرتب‌سازی محصولات
+        </p>
+
+    </div>
+
+    <div class="filter-panel">
+
+        <div class="filter-grid">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="نام محصول را جست‌وجو کنید..."
+                    autocomplete="off">
+
+            </div>
+
+            <select
+                class="filter-select"
+                id="brandFilter">
+
+                <option value="all">
+                    🏷️ همه برندها
+                </option>
+
+                <option value="samsung">
+                    سامسونگ
+                </option>
+
+                <option value="apple">
+                    اپل
+                </option>
+
+                <option value="xiaomi">
+                    شیائومی
+                </option>
+
+                <option value="honor">
+                    آنر
+                </option>
+
+                <option value="google">
+                    گوگل
+                </option>
+
+                <option value="oneplus">
+                    وان‌پلاس
+                </option>
+
+                <option value="microsoft">
+                    مایکروسافت
+                </option>
+
+                <option value="lenovo">
+                    لنوو
+                </option>
+
+                <option value="hp">
+                    اچ‌پی
+                </option>
+
+                <option value="asus">
+                    ایسوس
+                </option>
+
+            </select>
+
+            <select
+                class="filter-select"
+                id="typeFilter">
+
+                <option value="all">
+                    📦 همه دستگاه‌ها
+                </option>
+
+                <option value="mobile">
+                    📱 موبایل
+                </option>
+
+                <option value="tablet">
+                    📲 تبلت
+                </option>
+
+                <option value="laptop">
+                    💻 لپ‌تاپ
+                </option>
+
+                <option value="gadget">
+                    🎧 گجت
+                </option>
+
+            </select>
+
+            <select
+                class="filter-select"
+                id="sortFilter">
+
+                <option value="default">
+                    ↕️ مرتب‌سازی پیش‌فرض
+                </option>
+
+                <option value="name">
+                    🔤 نام محصول
+                </option>
+
+                <option value="newest">
+                    🆕 جدیدترین
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-info">
+
+            <div
+                class="result-count"
+                id="resultCount">
+                0 محصول نمایش داده می‌شود
+            </div>
+
+            <button
+                class="clear-filters"
+                id="clearFilters">
+                ✕ پاک کردن فیلترها
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        class="products-grid"
+        id="productsGrid">
+    </div>
+
+    <div
+        class="no-products"
+        id="noProducts">
+
+        <div class="no-products-icon">
+            🔍
+        </div>
+
+        <h3>
+            محصولی پیدا نشد!
+        </h3>
+
+        <p>
+            عبارت جست‌وجو یا فیلترهای انتخابی را تغییر دهید.
+        </p>
+
+    </div>
+
+</section>
+
+<section
+    class="section"
+    id="features">
+
+    <div class="section-title">
+
+        <h2>
+            امکانات
+            <span>فلوتِک</span>
+        </h2>
+
+        <p>
+            امکاناتی برای تجربه بهتر
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-number">
+                01 — SEARCH
+            </div>
+
+            <h3>
+                🔎 جست‌وجوی سریع
+            </h3>
+
+            <p>
+                نام محصول مورد نظرت را وارد کن
+                تا نتیجه‌ها همان لحظه نمایش داده شوند.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-number">
+                02 — FILTER
+            </div>
+
+            <h3>
+                🏷️ فیلتر هوشمند
+            </h3>
+
+            <p>
+                محصولات را بر اساس برند و نوع دستگاه
+                فیلتر و مرتب کن.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-number">
+                03 — DETAILS
+            </div>
+
+            <h3>
+                📋 مشخصات کامل
+            </h3>
+
+            <p>
+                مشخصات اصلی و جزئیات فنی هر محصول
+                را در پنجره اختصاصی مشاهده کن.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section
+    class="section"
+    id="about">
+
+    <div class="section-title">
+
+        <h2>
+            درباره
+            <span>فلوتِک</span>
+        </h2>
+
+        <p>
+            تکنولوژی و مشخصات در یک جا
+        </p>
+
+    </div>
+
+    <div class="info-box">
+
+        <p>
+            فلوتِک یک مرجع برای علاقه‌مندان
+            به دنیای تکنولوژی و محصولات دیجیتال است.
+            در این مجموعه می‌توانید مشخصات انواع
+            موبایل، تبلت، لپ‌تاپ و گجت‌ها را
+            دنبال کنید.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="cta">
+
+    <h2>
+        همیشه یک قدم جلوتر از
+        <span>تکنولوژی</span>
+        باش! 🚀
+    </h2>
+
+    <p>
+        برای مشاهده جدیدترین محصولات
+        به کانال فلوتِک سر بزن.
+    </p>
+
+    <a
+        href="https://ble.ir/flowtech"
+        target="_blank"
+        rel="noopener"
+        class="primary-button">
+        🚀 عضویت در کانال فلوتِک
+    </a>
+
+</section>
+
+</main>
+
+<footer>
+
+    <div class="footer-logo">
+        <span>فلوت</span>ِک
+    </div>
+
+    <p>
+        مرجع مشخصات محصولات دیجیتال
+    </p>
+
+    <p
+        class="last-update"
+        id="lastUpdate">
+        آخرین بروزرسانی: در حال بارگذاری...
+    </p>
+
+</footer>
+
+<button
+    class="back-to-top"
+    id="backToTop"
+    aria-label="بازگشت به بالا">
+    ↑
+</button>
+
+<div
+    class="toast"
+    id="toast">
+    انجام شد ✓
+</div>
+
+<div
+    class="details-modal"
+    id="detailsModal"
+    aria-hidden="true">
+
+    <div class="details-box">
+
+        <div class="details-header">
+
+            <div>
+
+                <h2
+                    class="details-title"
+                    id="detailsTitle">
+                </h2>
+
+                <div
+                    class="details-subtitle"
+                    id="detailsSubtitle">
+                </div>
+
+            </div>
+
+            <button
+                class="close-details"
+                id="closeDetails"
+                aria-label="بستن">
+                ✕
+            </button>
+
+        </div>
+
+        <div
+            class="details-grid"
+            id="detailsGrid">
+        </div>
+
+        <div
+            class="details-note"
+            id="detailsNote">
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const brandFilter =
+    document.getElementById("brandFilter");
+
+const typeFilter =
+    document.getElementById("typeFilter");
+
+const sortFilter =
+    document.getElementById("sortFilter");
+
+const productsGrid =
+    document.getElementById("productsGrid");
+
+const resultCount =
+    document.getElementById("resultCount");
+
+const noProducts =
+    document.getElementById("noProducts");
+
+const clearFilters =
+    document.getElementById("clearFilters");
+
+const toast =
+    document.getElementById("toast");
+
+const backToTop =
+    document.getElementById("backToTop");
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const navLinks =
+    document.getElementById("navLinks");
+
+const detailsModal =
+    document.getElementById("detailsModal");
+
+const detailsTitle =
+    document.getElementById("detailsTitle");
+
+const detailsSubtitle =
+    document.getElementById("detailsSubtitle");
+
+const detailsGrid =
+    document.getElementById("detailsGrid");
+
+const detailsNote =
+    document.getElementById("detailsNote");
+
+const closeDetails =
+    document.getElementById("closeDetails");
+
+
+const realProducts = [
+
+    {
+        name: "samsung galaxy a26 5g 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.7 اینچ Super AMOLED، وضوح FHD+، نرخ نوسازی 120Hz",
+            "پردازنده": "Exynos 1380، هشت هسته‌ای",
+            "رم": "نسخه‌های مختلف 6GB / 8GB",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "50MP با OIS + 8MP فوق‌عریض + 2MP ماکرو",
+            "دوربین سلفی": "13MP",
+            "باتری": "5000mAh",
+            "شارژ": "25W سیمی",
+            "شبکه": "4G / 5G، Dual SIM",
+            "سیستم‌عامل": "Android 15 / One UI 7",
+            "مقاومت": "IP67",
+            "اثر انگشت": "حسگر اثر انگشت زیر نمایشگر",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy a36 5g 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.7 اینچ Super AMOLED، FHD+، 120Hz",
+            "پردازنده": "Snapdragon 6 Gen 3",
+            "رم": "6GB / 8GB / 12GB بسته به بازار",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "50MP با OIS + 8MP فوق‌عریض + 5MP ماکرو",
+            "دوربین سلفی": "12MP",
+            "باتری": "5000mAh",
+            "شارژ": "45W",
+            "شبکه": "4G / 5G",
+            "سیستم‌عامل": "Android 15 / One UI 7",
+            "مقاومت": "IP67",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy a56 5g 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.7 اینچ Super AMOLED، FHD+، 120Hz",
+            "پردازنده": "Exynos 1580",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "128GB / 256GB / 512GB بسته به بازار",
+            "دوربین اصلی": "50MP OIS + 12MP فوق‌عریض + 5MP ماکرو",
+            "دوربین سلفی": "12MP",
+            "باتری": "5000mAh",
+            "شارژ": "45W",
+            "شبکه": "4G / 5G",
+            "سیستم‌عامل": "Android 15 / One UI 7",
+            "مقاومت": "IP67",
+            "امنیت": "حسگر اثر انگشت زیر نمایشگر",
+            "اتصالات": "Wi-Fi 6، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy a57 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "حدود 6.7 اینچ Super AMOLED، نرخ نوسازی بالا",
+            "پردازنده": "چیپست سری Exynos مخصوص Galaxy A57",
+            "رم": "بسته به نسخه و بازار",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "دوربین چندگانه با لرزش‌گیر اپتیکال",
+            "دوربین سلفی": "دوربین سلفی سامسونگ با پردازش هوش مصنوعی",
+            "باتری": "ظرفیت بالا در کلاس 5000mAh",
+            "شارژ": "شارژ سریع سیمی",
+            "شبکه": "4G / 5G",
+            "سیستم‌عامل": "Android / One UI",
+            "مقاومت": "مقاومت در برابر آب و گردوغبار بسته به نسخه بازار",
+            "امنیت": "حسگر اثر انگشت",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy s25 ultra 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.9 اینچ Dynamic AMOLED 2X، QHD+، 120Hz",
+            "پردازنده": "Snapdragon 8 Elite for Galaxy",
+            "رم": "12GB",
+            "حافظه داخلی": "256GB / 512GB / 1TB",
+            "دوربین اصلی": "200MP",
+            "دوربین فوق‌عریض": "50MP",
+            "تله‌فوتو": "10MP تله‌فوتو 3x + 50MP پریسکوپی 5x",
+            "دوربین سلفی": "12MP",
+            "باتری": "5000mAh",
+            "شارژ": "45W سیمی، شارژ بی‌سیم",
+            "شبکه": "4G / 5G",
+            "سیستم‌عامل": "Android 15 / One UI 7",
+            "بدنه": "فریم تیتانیومی",
+            "مقاومت": "IP68",
+            "قلم": "S Pen داخلی",
+            "اتصالات": "Wi-Fi 7، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy s26 ultra 256gb",
+        brand: "samsung",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "حدود 6.9 اینچ Dynamic AMOLED 2X، QHD+، 120Hz",
+            "پردازنده": "نسخه پرچمدار Snapdragon / Exynos بسته به بازار",
+            "رم": "12GB / 16GB بسته به نسخه",
+            "حافظه داخلی": "256GB / 512GB / 1TB",
+            "دوربین اصلی": "دوربین اصلی پرچمدار سامسونگ با لرزش‌گیر اپتیکال",
+            "دوربین تله‌فوتو": "تله‌فوتو و پریسکوپی با زوم اپتیکال",
+            "دوربین سلفی": "دوربین سلفی پرچمدار",
+            "باتری": "ظرفیت بالا در کلاس Ultra",
+            "شارژ": "شارژ سریع سیمی و بی‌سیم",
+            "شبکه": "4G / 5G",
+            "سیستم‌عامل": "Android / One UI",
+            "مقاومت": "IP68",
+            "قلم": "S Pen داخلی",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi 14c 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.88 اینچ LCD، 1640×720، تا 120Hz",
+            "پردازنده": "MediaTek Helio G81-Ultra",
+            "رم": "4GB / 8GB + حافظه مجازی",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "50MP",
+            "دوربین سلفی": "13MP",
+            "باتری": "5160mAh",
+            "شارژ": "18W",
+            "شبکه": "4G، Dual SIM",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "اثر انگشت": "کناری",
+            "اتصالات": "Wi-Fi ac، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi 15c 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.9 اینچ LCD، وضوح HD+، نرخ نوسازی بالا",
+            "پردازنده": "MediaTek سری Helio G",
+            "رم": "بسته به بازار",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "50MP",
+            "دوربین سلفی": "8MP",
+            "باتری": "ظرفیت بالا در کلاس 6000mAh",
+            "شارژ": "شارژ سریع سیمی",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "امنیت": "اثر انگشت کناری",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi 15 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.9 اینچ LCD، نرخ نوسازی بالا",
+            "پردازنده": "Snapdragon سری 6 / چیپست مخصوص بازار",
+            "رم": "8GB بسته به نسخه",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "50MP",
+            "دوربین سلفی": "8MP",
+            "باتری": "ظرفیت بالا در کلاس 7000mAh",
+            "شارژ": "33W",
+            "شبکه": "4G / 5G بسته به نسخه",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "مقاومت": "مقاومت پایه در برابر آب و گردوغبار",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi note 14 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.67 اینچ AMOLED، 2400×1080، 120Hz",
+            "پردازنده": "MediaTek Helio G99-Ultra",
+            "رم": "6GB / 8GB",
+            "حافظه داخلی": "128GB / 256GB، امکان microSD در برخی نسخه‌ها",
+            "دوربین اصلی": "108MP + 2MP عمق + 2MP ماکرو",
+            "دوربین سلفی": "20MP",
+            "باتری": "5500mAh",
+            "شارژ": "33W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "مقاومت": "IP54",
+            "صدا": "اسپیکر استریو + Dolby Atmos + جک 3.5mm",
+            "اتصالات": "Wi-Fi، Bluetooth 5.3، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi note 14 pro 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.67 اینچ AMOLED، 2400×1080، 120Hz",
+            "پردازنده": "MediaTek Helio G100-Ultra",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "256GB / 512GB",
+            "دوربین اصلی": "200MP با OIS + 8MP فوق‌عریض + 2MP ماکرو",
+            "دوربین سلفی": "32MP",
+            "باتری": "5500mAh",
+            "شارژ": "45W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "مقاومت": "IP64",
+            "امنیت": "اثر انگشت زیر نمایشگر",
+            "اتصالات": "Wi-Fi، Bluetooth 5.3، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi note 15 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.77 اینچ AMOLED، 2392×1080، 120Hz",
+            "پردازنده": "MediaTek Helio G100-Ultra",
+            "رم": "6GB / 8GB",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "108MP + 2MP عمق",
+            "دوربین سلفی": "20MP",
+            "باتری": "6000mAh",
+            "شارژ": "33W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Xiaomi HyperOS 2",
+            "امنیت": "اثر انگشت زیر نمایشگر",
+            "اتصالات": "Wi-Fi، Bluetooth 5.3، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi note 15 pro 256gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.77 اینچ AMOLED، 2392×1080، 120Hz",
+            "پردازنده": "MediaTek Helio G200-Ultra",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "256GB / 512GB",
+            "دوربین اصلی": "200MP با OIS + 8MP فوق‌عریض",
+            "دوربین سلفی": "32MP",
+            "باتری": "6500mAh",
+            "شارژ": "45W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Xiaomi HyperOS 2",
+            "مقاومت": "IP65",
+            "صدا": "اسپیکر دوگانه + Dolby Atmos",
+            "اتصالات": "Wi-Fi، Bluetooth 5.3، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi note 15 pro plus 512gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.83 اینچ AMOLED، وضوح 1.5K، 120Hz",
+            "پردازنده": "Snapdragon 7s Gen 4",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "256GB / 512GB",
+            "دوربین اصلی": "200MP با OIS + 8MP فوق‌عریض",
+            "دوربین سلفی": "32MP",
+            "باتری": "6500mAh",
+            "شارژ": "100W",
+            "شبکه": "5G",
+            "سیستم‌عامل": "Xiaomi HyperOS",
+            "مقاومت": "بسته به نسخه بازار",
+            "امنیت": "اثر انگشت زیر نمایشگر",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi poco x7 pro 512gb",
+        brand: "xiaomi",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.67 اینچ CrystalRes AMOLED، 1.5K، 120Hz",
+            "پردازنده": "MediaTek Dimensity 8400-Ultra، 4nm",
+            "رم": "8GB / 12GB LPDDR5X",
+            "حافظه داخلی": "256GB / 512GB UFS 4.0",
+            "دوربین اصلی": "50MP با OIS + 8MP فوق‌عریض",
+            "دوربین سلفی": "20MP",
+            "باتری": "6000mAh",
+            "شارژ": "90W HyperCharge",
+            "شبکه": "5G",
+            "سیستم‌عامل": "Xiaomi HyperOS 2",
+            "مقاومت": "IP68",
+            "صدا": "اسپیکر استریو + Dolby Atmos",
+            "اتصالات": "Wi-Fi 6، Bluetooth 6.0، NFC، IR، USB-C"
+        }
+    },
+
+    {
+        name: "apple iphone 16 128gb",
+        brand: "apple",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.1 اینچ Super Retina XDR OLED، 2556×1179",
+            "پردازنده": "Apple A18",
+            "رم": "8GB",
+            "حافظه داخلی": "128GB / 256GB / 512GB",
+            "دوربین اصلی": "48MP Fusion + 12MP فوق‌عریض",
+            "دوربین سلفی": "12MP TrueDepth",
+            "باتری": "باتری داخلی لیتیوم‌یونی",
+            "شارژ": "USB-C، شارژ سریع، MagSafe",
+            "شبکه": "5G",
+            "سیستم‌عامل": "iOS",
+            "مقاومت": "IP68",
+            "امنیت": "Face ID",
+            "اتصالات": "Wi-Fi 7، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "apple iphone 17 pro max 256gb",
+        brand: "apple",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "حدود 6.9 اینچ Super Retina XDR OLED با ProMotion",
+            "پردازنده": "Apple A19 Pro",
+            "رم": "بسته به پیکربندی",
+            "حافظه داخلی": "256GB و بالاتر بسته به نسخه",
+            "دوربین اصلی": "سیستم دوربین Pro چندگانه",
+            "تله‌فوتو": "سیستم تله‌فوتو با زوم اپتیکال",
+            "دوربین سلفی": "TrueDepth",
+            "باتری": "باتری داخلی لیتیوم‌یونی",
+            "شارژ": "USB-C، شارژ سریع، MagSafe",
+            "شبکه": "5G",
+            "سیستم‌عامل": "iOS",
+            "مقاومت": "IP68",
+            "امنیت": "Face ID",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC، USB-C"
+        }
+    },
+
+    {
+        name: "honor x5b 4gb 64gb",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.56 اینچ TFT LCD، HD+، 90Hz",
+            "پردازنده": "MediaTek Helio G36",
+            "رم": "4GB",
+            "حافظه داخلی": "64GB",
+            "دوربین اصلی": "13MP",
+            "دوربین سلفی": "5MP",
+            "باتری": "5200mAh",
+            "شارژ": "10W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Android",
+            "امنیت": "تشخیص چهره",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "honor x5b plus 4gb 128gb",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.56 اینچ TFT LCD، HD+، 90Hz",
+            "پردازنده": "MediaTek Helio G36",
+            "رم": "4GB",
+            "حافظه داخلی": "128GB",
+            "دوربین اصلی": "50MP",
+            "دوربین سلفی": "5MP",
+            "باتری": "5200mAh",
+            "شارژ": "10W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Android",
+            "امنیت": "تشخیص چهره",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "honor x7d 4g",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.77 اینچ TFT LCD، HD+، 120Hz",
+            "پردازنده": "Snapdragon 685",
+            "رم": "بسته به بازار",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "108MP + دوربین کمکی",
+            "دوربین سلفی": "8MP",
+            "باتری": "6500mAh",
+            "شارژ": "35W",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Android",
+            "مقاومت": "IP54",
+            "صدا": "اسپیکر دوگانه",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "honor 200 lite 256gb",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.7 اینچ AMOLED، FHD+، 90Hz",
+            "پردازنده": "MediaTek Dimensity 6080",
+            "رم": "8GB",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "108MP + 5MP فوق‌عریض + 2MP",
+            "دوربین سلفی": "50MP",
+            "باتری": "4500mAh",
+            "شارژ": "35W",
+            "شبکه": "5G",
+            "سیستم‌عامل": "Android / MagicOS",
+            "امنیت": "اثر انگشت کناری",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "honor 600 lite",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "6.6 اینچ AMOLED، 1.5K، 120Hz",
+            "پردازنده": "MediaTek Dimensity سری 7000 بسته به بازار",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "108MP",
+            "دوربین سلفی": "دوربین سلفی با قابلیت‌های هوش مصنوعی",
+            "باتری": "6520mAh ظرفیت معمول",
+            "شارژ": "45W",
+            "شبکه": "5G",
+            "سیستم‌عامل": "Android / MagicOS",
+            "مقاومت": "IP66",
+            "روشنایی": "تا 6500 نیت در شرایط اعلام‌شده سازنده",
+            "اتصالات": "Wi-Fi، Bluetooth، NFC بسته به بازار، USB-C"
+        }
+    },
+
+    {
+        name: "honor play 10 4g",
+        brand: "honor",
+        type: "mobile",
+        specs: {
+            "نمایشگر": "نمایشگر LCD بزرگ HD+",
+            "پردازنده": "چیپست اقتصادی MediaTek",
+            "رم": "4GB",
+            "حافظه داخلی": "128GB",
+            "دوربین اصلی": "دوربین اصلی اقتصادی",
+            "دوربین سلفی": "دوربین سلفی پایه",
+            "باتری": "ظرفیت بالا در کلاس اقتصادی",
+            "شارژ": "شارژ سیمی",
+            "شبکه": "4G",
+            "سیستم‌عامل": "Android / MagicOS",
+            "امنیت": "تشخیص چهره / روش‌های امنیتی پایه",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy tab a11 128gb",
+        brand: "samsung",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "حدود 8.7 اینچ LCD، نرخ نوسازی بالا",
+            "پردازنده": "MediaTek Helio G99",
+            "رم": "4GB / 6GB بسته به بازار",
+            "حافظه داخلی": "128GB",
+            "دوربین اصلی": "دوربین اصلی مناسب استفاده روزمره",
+            "دوربین سلفی": "دوربین سلفی",
+            "باتری": "باتری بزرگ مخصوص تبلت",
+            "شارژ": "USB-C و شارژ سریع",
+            "شبکه": "Wi-Fi / نسخه LTE بسته به مدل",
+            "سیستم‌عامل": "Android",
+            "صدا": "اسپیکر استریو",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy tab a11 plus 128gb",
+        brand: "samsung",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "حدود 11 اینچ LCD، نرخ نوسازی بالا",
+            "پردازنده": "MediaTek Dimensity 7300",
+            "رم": "6GB / 8GB",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "دوربین اصلی تبلت",
+            "دوربین سلفی": "دوربین سلفی",
+            "باتری": "باتری بزرگ",
+            "شارژ": "USB-C",
+            "شبکه": "Wi-Fi",
+            "سیستم‌عامل": "Android",
+            "صدا": "اسپیکرهای چندگانه",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy tab a11 plus 5g 256gb",
+        brand: "samsung",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "حدود 11 اینچ LCD، نرخ نوسازی بالا",
+            "پردازنده": "MediaTek Dimensity 7300",
+            "رم": "8GB",
+            "حافظه داخلی": "256GB",
+            "دوربین اصلی": "دوربین اصلی تبلت",
+            "دوربین سلفی": "دوربین سلفی",
+            "باتری": "باتری بزرگ مخصوص تبلت",
+            "شارژ": "USB-C",
+            "شبکه": "5G + 4G",
+            "سیستم‌عامل": "Android",
+            "صدا": "اسپیکرهای چندگانه",
+            "اتصالات": "Wi-Fi، Bluetooth، 5G، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy tab s10 fe plus 128gb",
+        brand: "samsung",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "13.1 اینچ LCD، 2880×1800، 90Hz",
+            "پردازنده": "Exynos 1580",
+            "رم": "8GB / 12GB",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "13MP",
+            "دوربین سلفی": "12MP فوق‌عریض",
+            "باتری": "10090mAh",
+            "شارژ": "45W",
+            "شبکه": "Wi-Fi / 5G بسته به نسخه",
+            "سیستم‌عامل": "Android / One UI",
+            "مقاومت": "IP68",
+            "قلم": "S Pen",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "samsung galaxy tab s11 256gb",
+        brand: "samsung",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "نمایشگر Dynamic AMOLED 2X با نرخ نوسازی بالا",
+            "پردازنده": "MediaTek Dimensity 9400+",
+            "رم": "12GB",
+            "حافظه داخلی": "256GB / 512GB",
+            "دوربین اصلی": "13MP",
+            "دوربین سلفی": "12MP",
+            "باتری": "ظرفیت بالا مخصوص تبلت پرچمدار",
+            "شارژ": "شارژ سریع",
+            "شبکه": "Wi-Fi / 5G بسته به نسخه",
+            "سیستم‌عامل": "Android / One UI",
+            "مقاومت": "IP68",
+            "قلم": "S Pen",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "xiaomi redmi pad 2 128gb",
+        brand: "xiaomi",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "11 اینچ LCD، 2560×1600، 90Hz",
+            "پردازنده": "MediaTek Helio G100-Ultra",
+            "رم": "4GB / 8GB",
+            "حافظه داخلی": "128GB / 256GB",
+            "دوربین اصلی": "8MP",
+            "دوربین سلفی": "5MP",
+            "باتری": "9000mAh",
+            "شارژ": "18W",
+            "شبکه": "Wi-Fi",
+            "سیستم‌عامل": "Xiaomi HyperOS 2",
+            "صدا": "چهار اسپیکر + Dolby Atmos",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "apple ipad air 13 2026 m4 256gb",
+        brand: "apple",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "13 اینچ Liquid Retina، 2732×2048، 600 نیت",
+            "پردازنده": "Apple M4",
+            "رم": "12GB Unified Memory",
+            "حافظه داخلی": "128GB / 256GB / 512GB / 1TB",
+            "دوربین اصلی": "12MP Wide",
+            "دوربین سلفی": "12MP Center Stage",
+            "باتری": "تا حدود 10 ساعت استفاده وب/ویدئو",
+            "شارژ": "USB-C",
+            "شبکه": "Wi-Fi / Cellular بسته به نسخه",
+            "سیستم‌عامل": "iPadOS",
+            "قلم": "Apple Pencil Pro و Apple Pencil USB-C",
+            "اتصالات": "Wi-Fi، Bluetooth، USB-C"
+        }
+    },
+
+    {
+        name: "microsoft surface pro 11 256gb",
+        brand: "microsoft",
+        type: "tablet",
+        specs: {
+            "نمایشگر": "13 اینچ PixelSense Flow، 2880×1920، تا 120Hz",
+            "پردازنده": "Snapdragon X Plus یا Snapdragon X Elite بسته به نسخه",
+            "رم": "16GB / 32GB",
+            "حافظه داخلی": "256GB / 512GB / 1TB SSD",
+            "دوربین اصلی": "10MP Ultra HD",
+            "دوربین سلفی": "1440p Quad HD",
+            "باتری": "باتری داخلی با شارژ USB-C",
+            "شارژ": "Surface Connect و USB-C",
+            "شبکه": "Wi-Fi 7",
+            "سیستم‌عامل": "Windows 11",
+            "امنیت": "Windows Hello",
+            "بدنه": "آلومینیومی",
+            "اتصالات": "USB-C/USB4، Wi-Fi، Bluetooth"
+        }
+    },
+
+    {
+        name: "apple macbook air 15 m5 24gb 1tb",
+        brand: "apple",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.3 اینچ Liquid Retina، وضوح 2880×1864",
+            "پردازنده": "Apple M5",
+            "رم": "24GB Unified Memory",
+            "حافظه داخلی": "1TB SSD",
+            "پردازنده گرافیکی": "GPU داخلی Apple",
+            "دوربین": "12MP Center Stage",
+            "باتری": "باتری داخلی لیتیوم‌پلیمر با شارژدهی طولانی",
+            "شارژ": "MagSafe 3 + USB-C",
+            "سیستم‌عامل": "macOS",
+            "صدا": "سیستم صوتی چنداسپیکره",
+            "اتصالات": "Wi-Fi، Bluetooth، MagSafe، Thunderbolt/USB-C",
+            "امنیت": "Touch ID"
+        }
+    },
+
+    {
+        name: "lenovo ideapad slim 3 i3 1315u 8gb 256gb",
+        brand: "lenovo",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.6 اینچ FHD، نوع پنل بسته به کانفیگ",
+            "پردازنده": "Intel Core i3-1315U",
+            "رم": "8GB",
+            "حافظه داخلی": "256GB SSD",
+            "گرافیک": "Intel UHD Graphics",
+            "دوربین": "HD Webcam",
+            "باتری": "باتری داخلی لیتیوم-یونی",
+            "سیستم‌عامل": "Windows 11 بسته به نسخه",
+            "پورت‌ها": "USB-A، USB-C، HDMI، جک 3.5mm",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "بدنه": "طراحی باریک IdeaPad"
+        }
+    },
+
+    {
+        name: "lenovo ideapad slim 3 i3 1315u 8gb 512gb",
+        brand: "lenovo",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.6 اینچ FHD",
+            "پردازنده": "Intel Core i3-1315U",
+            "رم": "8GB",
+            "حافظه داخلی": "512GB SSD",
+            "گرافیک": "Intel UHD Graphics",
+            "دوربین": "HD Webcam",
+            "باتری": "باتری داخلی لیتیوم-یونی",
+            "سیستم‌عامل": "Windows 11 بسته به نسخه",
+            "پورت‌ها": "USB-A، USB-C، HDMI، جک 3.5mm",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "کاربری": "روزمره، تحصیل و کار اداری"
+        }
+    },
+
+    {
+        name: "lenovo v15 g4 i5 13420h 16gb 512gb",
+        brand: "lenovo",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.6 اینچ FHD",
+            "پردازنده": "Intel Core i5-13420H",
+            "رم": "16GB",
+            "حافظه داخلی": "512GB SSD",
+            "گرافیک": "Intel UHD Graphics / گرافیک مجزا بسته به کانفیگ",
+            "دوربین": "HD Webcam",
+            "باتری": "باتری داخلی",
+            "سیستم‌عامل": "Windows 11 بسته به نسخه",
+            "پورت‌ها": "USB-A، USB-C، HDMI، RJ-45، جک 3.5mm",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "کاربری": "اداری، تجاری، تحصیلی"
+        }
+    },
+
+    {
+        name: "hp victus 15 i5 13420h 8gb 512gb",
+        brand: "hp",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.6 اینچ FHD، نرخ نوسازی بالا بسته به کانفیگ",
+            "پردازنده": "Intel Core i5-13420H",
+            "رم": "8GB",
+            "حافظه داخلی": "512GB NVMe SSD",
+            "گرافیک": "NVIDIA GeForce RTX بسته به کانفیگ",
+            "دوربین": "HD Webcam",
+            "باتری": "باتری چندسلولی",
+            "سیستم‌عامل": "Windows 11 بسته به نسخه",
+            "پورت‌ها": "USB-A، USB-C، HDMI، RJ-45، جک صدا",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "کاربری": "گیمینگ، طراحی و کار سنگین"
+        }
+    },
+
+    {
+        name: "asus vivobook 15 i3 1315u 8gb 512gb",
+        brand: "asus",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "15.6 اینچ Full HD",
+            "پردازنده": "Intel Core i3-1315U",
+            "رم": "8GB",
+            "حافظه داخلی": "512GB SSD",
+            "گرافیک": "Intel UHD Graphics",
+            "دوربین": "HD Webcam",
+            "باتری": "باتری داخلی لیتیوم‌یونی",
+            "سیستم‌عامل": "Windows 11 بسته به نسخه",
+            "پورت‌ها": "USB-A، USB-C، HDMI، جک 3.5mm",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "کاربری": "دانش‌آموزی، اداری و روزمره"
+        }
+    },
+
+    {
+        name: "asus rog strix g16 i7 14650hx 16gb 1tb",
+        brand: "asus",
+        type: "laptop",
+        specs: {
+            "نمایشگر": "16 اینچ، بسته به کانفیگ FHD+/QHD+ با نرخ نوسازی بالا",
+            "پردازنده": "Intel Core i7-14650HX",
+            "رم": "16GB DDR5",
+            "حافظه داخلی": "1TB PCIe NVMe SSD",
+            "گرافیک": "NVIDIA GeForce RTX، بسته به کانفیگ",
+            "دوربین": "720p/HD Webcam بسته به نسخه",
+            "باتری": "باتری چندسلولی مخصوص لپ‌تاپ گیمینگ",
+            "سیستم‌عامل": "Windows 11",
+            "خنک‌کننده": "سیستم خنک‌کننده ROG با چند فن و هیت‌پایپ",
+            "پورت‌ها": "USB-A، USB-C، HDMI، RJ-45، جک صدا",
+            "اتصالات": "Wi-Fi، Bluetooth",
+            "کاربری": "گیمینگ، رندرینگ و کارهای سنگین"
+        }
+    },
+
+    {
+        name: "samsung galaxy watch 8 44mm",
+        brand: "samsung",
+        type: "gadget",
+        specs: {
+            "نمایشگر": "نمایشگر Super AMOLED، نسخه 44mm",
+            "پردازنده": "چیپست مخصوص Galaxy Watch",
+            "حافظه": "حافظه داخلی مخصوص اپلیکیشن و موسیقی",
+            "حسگرها": "ضربان قلب، شتاب‌سنج، ژیروسکوپ، سنجش فعالیت‌های ورزشی",
+            "سلامت": "پایش فعالیت، خواب و شاخص‌های سلامتی پشتیبانی‌شده",
+            "مقاومت": "مقاومت در برابر آب و گردوغبار بسته به استاندارد مدل",
+            "سیستم‌عامل": "Wear OS با رابط One UI Watch",
+            "اتصالات": "Bluetooth، Wi-Fi، NFC",
+            "موقعیت‌یابی": "GPS",
+            "شارژ": "شارژ بی‌سیم",
+            "سازگاری": "Android"
+        }
+    },
+
+    {
+        name: "xiaomi redmi watch 5 active",
+        brand: "xiaomi",
+        type: "gadget",
+        specs: {
+            "نمایشگر": "2 اینچ LCD، وضوح 320×385",
+            "پردازنده": "پردازنده کم‌مصرف مخصوص ساعت",
+            "حافظه": "حافظه داخلی محدود برای سیستم",
+            "حسگرها": "سنجش ضربان قلب، اکسیژن خون، شتاب‌سنج",
+            "ورزش": "پشتیبانی از حالت‌های ورزشی متعدد",
+            "باتری": "470mAh",
+            "شارژ": "شارژ مغناطیسی",
+            "مقاومت": "5ATM",
+            "سیستم‌عامل": "Xiaomi HyperOS / سیستم اختصاصی ساعت",
+            "اتصالات": "Bluetooth 5.3",
+            "میکروفون": "دارد",
+            "تماس": "پشتیبانی از تماس Bluetooth"
+        }
+    }
+
+];
+
+
+/* 📱 29 موبایل جدید */
+
+realProducts.push(
+
+    ...[
+        "Samsung Galaxy S25",
+        "Samsung Galaxy S25+",
+        "Samsung Galaxy S25 Edge",
+        "Samsung Galaxy Z Flip 7",
+        "Samsung Galaxy Z Fold 7",
+        "iPhone 16 Plus",
+        "iPhone 16 Pro",
+        "iPhone 16 Pro Max",
+        "iPhone 17",
+        "iPhone 17 Air",
+        "iPhone 17 Pro",
+        "Google Pixel 9",
+        "Google Pixel 9 Pro",
+        "Google Pixel 9 Pro XL",
+        "OnePlus 13",
+        "OnePlus 13R",
+        "Xiaomi 15",
+        "Xiaomi 15 Pro",
+        "Xiaomi 15 Ultra",
+        "Xiaomi 14T",
+        "Xiaomi 14T Pro",
+        "POCO F7",
+        "POCO F7 Pro",
+        "HONOR Magic7 Pro",
+        "HONOR Magic V3",
+        "HONOR 400",
+        "HONOR 400 Pro",
+        "Nothing Phone (3)",
+        "OnePlus Nord 5"
+    ].map(name => ({
+
+        name: name.toLowerCase(),
+
+        brand:
+            name.toLowerCase().includes("samsung")
+                ? "samsung"
+                : name.toLowerCase().includes("iphone")
+                ? "apple"
+                : name.toLowerCase().includes("google")
+                ? "google"
+                : name.toLowerCase().includes("oneplus")
+                ? "oneplus"
+                : name.toLowerCase().includes("honor")
+                ? "honor"
+                : "xiaomi",
+
+        type: "mobile",
+
+        specs: {
+            "وضعیت": "مدل موجود در فهرست فلوتِک",
+            "نوع دستگاه": "موبایل",
+            "برند": "اطلاعات برند در کارت محصول نمایش داده می‌شود",
+            "مشخصات": "برای این مدل اطلاعات کامل‌تر باید به نسخه و بازار عرضه توجه شود."
+        }
+
+    })),
+
+    /* 📲 20 تبلت جدید */
+
+    ...[
+        "Samsung Galaxy Tab S10 Ultra",
+        "Samsung Galaxy Tab S10+",
+        "Samsung Galaxy Tab S10",
+        "Samsung Galaxy Tab S9 Ultra",
+        "Samsung Galaxy Tab S9+",
+        "Samsung Galaxy Tab S9",
+        "Samsung Galaxy Tab A9",
+        "Samsung Galaxy Tab A9+",
+        "Apple iPad Pro 11 M5",
+        "Apple iPad Pro 13 M5",
+        "Apple iPad Air 11 M4",
+        "Apple iPad Air 13 M4",
+        "Apple iPad 11",
+        "Xiaomi Pad 7",
+        "Xiaomi Pad 7 Pro",
+        "Xiaomi Redmi Pad Pro",
+        "Lenovo Tab P12",
+        "Lenovo Tab M11",
+        "Microsoft Surface Pro 12",
+        "OnePlus Pad 2"
+    ].map(name => ({
+
+        name: name.toLowerCase(),
+
+        brand:
+            name.toLowerCase().includes("samsung")
+                ? "samsung"
+                : name.toLowerCase().includes("apple")
+                || name.toLowerCase().includes("ipad")
+                ? "apple"
+                : name.toLowerCase().includes("microsoft")
+                ? "microsoft"
+                : name.toLowerCase().includes("lenovo")
+                ? "lenovo"
+                : name.toLowerCase().includes("oneplus")
+                ? "oneplus"
+                : "xiaomi",
+
+        type: "tablet",
+
+        specs: {
+            "وضعیت": "مدل موجود در فهرست فلوتِک",
+            "نوع دستگاه": "تبلت",
+            "برند": "اطلاعات برند در کارت محصول نمایش داده می‌شود",
+            "مشخصات": "برای این مدل اطلاعات کامل‌تر باید به نسخه و بازار عرضه توجه شود."
+        }
+
+    })),
+
+    /* 💻 20 لپ‌تاپ جدید */
+
+    ...[
+        "Apple MacBook Air 13 M5",
+        "Apple MacBook Air 15 M5",
+        "Apple MacBook Pro 14 M5",
+        "Apple MacBook Pro 16 M5",
+        "ASUS ROG Zephyrus G16",
+        "ASUS ROG Strix G18",
+        "ASUS TUF Gaming A15",
+        "ASUS Vivobook 16",
+        "Lenovo Legion 5",
+        "Lenovo Legion 7",
+        "Lenovo LOQ 15",
+        "Lenovo ThinkPad E14",
+        "HP Victus 16",
+        "HP Omen 16",
+        "HP Pavilion 15",
+        "Dell XPS 13",
+        "Dell XPS 16",
+        "Dell Inspiron 15",
+        "Acer Nitro V 15",
+        "Microsoft Surface Laptop 7"
+    ].map(name => ({
+
+        name: name.toLowerCase(),
+
+        brand:
+            name.toLowerCase().includes("apple")
+                || name.toLowerCase().includes("macbook")
+                ? "apple"
+                : name.toLowerCase().includes("asus")
+                ? "asus"
+                : name.toLowerCase().includes("lenovo")
+                ? "lenovo"
+                : name.toLowerCase().includes("hp")
+                ? "hp"
+                : name.toLowerCase().includes("microsoft")
+                ? "microsoft"
+                : "lenovo",
+
+        type: "laptop",
+
+        specs: {
+            "وضعیت": "مدل موجود در فهرست فلوتِک",
+            "نوع دستگاه": "لپ‌تاپ",
+            "برند": "اطلاعات برند در کارت محصول نمایش داده می‌شود",
+            "مشخصات": "برای این مدل اطلاعات کامل‌تر باید به نسخه و کانفیگ توجه شود."
+        }
+
+    })),
+
+    /* 🎧 20 گجت جدید */
+
+    ...[
+        "Samsung Galaxy Watch 7",
+        "Samsung Galaxy Watch Ultra",
+        "Samsung Galaxy Buds3",
+        "Samsung Galaxy Buds3 Pro",
+        "Apple Watch Series 10",
+        "Apple Watch Ultra 2",
+        "AirPods 4",
+        "AirPods Pro 2",
+        "Google Pixel Watch 3",
+        "Google Pixel Buds Pro 2",
+        "Xiaomi Watch 2",
+        "Xiaomi Watch S4",
+        "Xiaomi Buds 5",
+        "Redmi Buds 6 Pro",
+        "OnePlus Watch 2",
+        "OnePlus Buds Pro 3",
+        "Honor Watch 5",
+        "Honor Earbuds 4 Pro",
+        "Nothing Ear",
+        "CMF Watch Pro 2"
+    ].map(name => ({
+
+        name: name.toLowerCase(),
+
+        brand:
+            name.toLowerCase().includes("samsung")
+                ? "samsung"
+                : name.toLowerCase().includes("apple")
+                || name.toLowerCase().includes("airpods")
+                ? "apple"
+                : name.toLowerCase().includes("google")
+                ? "google"
+                : name.toLowerCase().includes("oneplus")
+                ? "oneplus"
+                : name.toLowerCase().includes("honor")
+                ? "honor"
+                : "xiaomi",
+
+        type: "gadget",
+
+        specs: {
+            "وضعیت": "مدل موجود در فهرست فلوتِک",
+            "نوع دستگاه": "گجت",
+            "برند": "اطلاعات برند در کارت محصول نمایش داده می‌شود",
+            "مشخصات": "برای این مدل اطلاعات کامل‌تر باید به نسخه و بازار عرضه توجه شود."
+        }
+
+    }))
+
+);
+
+
+const brandNames = {
+
+    samsung: "samsung",
+    apple: "apple",
+    xiaomi: "xiaomi",
+    honor: "honor",
+    google: "google",
+    oneplus: "oneplus",
+    microsoft: "microsoft",
+    lenovo: "lenovo",
+    hp: "hp",
+    asus: "asus"
+
+};
+
+
+const typeNames = {
+
+    mobile: "📱 موبایل",
+    tablet: "📲 تبلت",
+    laptop: "💻 لپ‌تاپ",
+    gadget: "🎧 گجت"
+
+};
+
+
+const typeIcons = {
+
+    mobile: "📱",
+    tablet: "📲",
+    laptop: "💻",
+    gadget: "🎧"
+
+};
+
+
+function getSpecs(product) {
+
+    const entries =
+        Object.entries(product.specs || {});
+
+    return [
+
+        entries[0]?.[1] ||
+        "مشخصات در دسترس",
+
+        entries[1]?.[1] ||
+        "مشخصات محصول",
+
+        entries[2]?.[1] ||
+        "جزئیات فنی محصول"
+
+    ];
+
+}
+
+
+function createProductCard(product, index) {
+
+    const id =
+        product.name
+            .toLowerCase()
+            .replace(/[^a-z0-9\u0600-\u06ff]+/g, "-")
+        + "-" +
+        index;
+
+    const specs =
+        getSpecs(product);
+
+    const isHot =
+        index % 5 === 0;
+
+    const isNew =
+        index < 8;
+
+    return `
+
+        <article
+            class="product-card"
+            data-brand="${product.brand}"
+            data-type="${product.type}"
+            data-name="${product.name}"
+            data-new="${realProducts.length - index}">
+
+            <div class="product-top">
+
+                <div class="product-icon">
+                    ${typeIcons[product.type] || "📦"}
+                </div>
+
+                <div class="product-tags">
+
+                    ${
+                        isNew
+                        ?
+                        `<span class="tag tag-new">
+                            جدید
+                        </span>`
+                        :
+                        ""
+                    }
+
+                    ${
+                        isHot
+                        ?
+                        `<span class="tag tag-hot">
+                            🔥 محبوب
+                        </span>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+            </div>
+
+            <span class="product-brand">
+                ${brandNames[product.brand] || product.brand}
+            </span>
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <div class="product-type">
+                ${typeNames[product.type] || "📦 دستگاه"}
+            </div>
+
+            <ul class="product-specs">
+
+                <li>
+                    ${specs[0]}
+                </li>
+
+                <li>
+                    ${specs[1]}
+                </li>
+
+                <li>
+                    ${specs[2]}
+                </li>
+
+            </ul>
+
+            <div class="product-footer">
+
+                <div class="product-actions">
+
+                    <button
+                        class="product-button details-button"
+                        data-index="${index}">
+                        📋 مشخصات بیشتر
+                    </button>
+
+                    <button
+                        class="product-button copy-name"
+                        data-name="${product.name}">
+                        کپی نام
+                    </button>
+
+                    <button
+                        class="favorite-button"
+                        data-id="${id}"
+                        title="افزودن به علاقه‌مندی">
+                        ♡
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
 
     `;
 
-
-    document.head.appendChild(
-        ultraStyle
-    );
+}
 
 
-    /* =====================================================
-       16. اجرای نهایی
-       ===================================================== */
+function renderProducts() {
 
-    setTimeout(
-        function() {
+    productsGrid.innerHTML =
+        realProducts
+            .map(function(product, index) {
 
-            renderProducts();
-
-            updateProducts();
-
-            loadFavorites();
-
-            enhancedSearch();
-
-            observeCards();
-
-            document.getElementById(
-                "ftTotalProducts"
-            ).textContent =
-                new Intl.NumberFormat(
-                    "fa-IR"
-                ).format(
-                    realProducts.length
+                return createProductCard(
+                    product,
+                    index
                 );
 
-        },
-        50
+            })
+            .join("");
+
+}
+
+
+let products = [];
+
+
+function updateProducts() {
+
+    products =
+        Array.from(
+            document.querySelectorAll(
+                ".product-card"
+            )
+        );
+
+}
+
+
+function filterProducts() {
+
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+    const brand =
+        brandFilter.value;
+
+    const type =
+        typeFilter.value;
+
+    let visibleProducts =
+        products.filter(function(product) {
+
+            const name =
+                product.dataset.name
+                    .toLowerCase();
+
+            const productBrand =
+                product.dataset.brand;
+
+            const productType =
+                product.dataset.type;
+
+            const searchMatch =
+                name.includes(search);
+
+            const brandMatch =
+                brand === "all"
+                ||
+                productBrand === brand;
+
+            const typeMatch =
+                type === "all"
+                ||
+                productType === type;
+
+            return (
+                searchMatch &&
+                brandMatch &&
+                typeMatch
+            );
+
+        });
+
+
+    sortProducts(visibleProducts);
+
+
+    products.forEach(function(product) {
+
+        product.style.display =
+            "none";
+
+    });
+
+
+    visibleProducts.forEach(function(product) {
+
+        product.style.display =
+            "block";
+
+    });
+
+
+    resultCount.textContent =
+        new Intl.NumberFormat("fa-IR")
+            .format(
+                visibleProducts.length
+            )
+        +
+        " محصول نمایش داده می‌شود";
+
+
+    noProducts.style.display =
+        visibleProducts.length === 0
+        ?
+        "block"
+        :
+        "none";
+
+
+    loadFavorites();
+
+}
+
+
+function sortProducts(items) {
+
+    const sort =
+        sortFilter.value;
+
+
+    if (sort === "name") {
+
+        items.sort(function(a,b) {
+
+            return a.dataset.name
+                .localeCompare(
+                    b.dataset.name
+                );
+
+        });
+
+    }
+
+    else if (sort === "newest") {
+
+        items.sort(function(a,b) {
+
+            return (
+                Number(b.dataset.new)
+                -
+                Number(a.dataset.new)
+            );
+
+        });
+
+    }
+
+
+    items.forEach(function(product) {
+
+        productsGrid.appendChild(product);
+
+    });
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    filterProducts
+);
+
+
+brandFilter.addEventListener(
+    "change",
+    filterProducts
+);
+
+
+typeFilter.addEventListener(
+    "change",
+    filterProducts
+);
+
+
+sortFilter.addEventListener(
+    "change",
+    filterProducts
+);
+
+
+clearFilters.addEventListener(
+    "click",
+    function() {
+
+        searchInput.value = "";
+
+        brandFilter.value = "all";
+
+        typeFilter.value = "all";
+
+        sortFilter.value = "default";
+
+        filterProducts();
+
+        showToast(
+            "فیلترها پاک شدند ✓"
+        );
+
+    }
+);
+
+
+let favorites =
+    JSON.parse(
+        localStorage.getItem(
+            "flowtechFavorites"
+        )
+    ) || [];
+
+
+function loadFavorites() {
+
+    document
+        .querySelectorAll(
+            ".favorite-button"
+        )
+        .forEach(function(button) {
+
+            const id =
+                button.dataset.id;
+
+            if (
+                favorites.includes(id)
+            ) {
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.textContent =
+                    "♥";
+
+            }
+
+            else {
+
+                button.classList.remove(
+                    "active"
+                );
+
+                button.textContent =
+                    "♡";
+
+            }
+
+        });
+
+}
+
+
+function openDetails(index) {
+
+    const product =
+        realProducts[index];
+
+    if (!product) {
+        return;
+    }
+
+
+    detailsTitle.textContent =
+        product.name;
+
+
+    detailsSubtitle.textContent =
+        (typeNames[product.type] || "📦 دستگاه")
+        +
+        " • "
+        +
+        (brandNames[product.brand] || product.brand);
+
+
+    detailsGrid.innerHTML =
+        Object.entries(
+            product.specs || {}
+        )
+        .map(function(item) {
+
+            return `
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        ${item[0]}
+                    </span>
+
+                    <div class="detail-value">
+                        ${item[1]}
+                    </div>
+
+                </div>
+
+            `;
+
+        })
+        .join("");
+
+
+    detailsNote.textContent =
+        "توجه: مشخصات ممکن است بر اساس کشور، نسخه، حافظه، شبکه و کانفیگ محصول متفاوت باشد. برای مشخصات دقیق نسخه موردنظر، مدل و بازار عرضه باید بررسی شود.";
+
+
+    detailsModal.classList.add(
+        "active"
     );
 
 
-})();
+    detailsModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "menu-open"
+    );
+
+}
+
+
+function closeDetailsModal() {
+
+    detailsModal.classList.remove(
+        "active"
+    );
+
+
+    detailsModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+}
+
+
+closeDetails.addEventListener(
+    "click",
+    closeDetailsModal
+);
+
+
+detailsModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === detailsModal
+        ) {
+
+            closeDetailsModal();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+            &&
+            detailsModal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeDetailsModal();
+
+        }
+
+    }
+);
+
+
+productsGrid.addEventListener(
+    "click",
+    async function(event) {
+
+        const favoriteButton =
+            event.target.closest(
+                ".favorite-button"
+            );
+
+
+        const copyButton =
+            event.target.closest(
+                ".copy-name"
+            );
+
+
+        const detailsButton =
+            event.target.closest(
+                ".details-button"
+            );
+
+
+        if (detailsButton) {
+
+            openDetails(
+                Number(
+                    detailsButton.dataset.index
+                )
+            );
+
+        }
+
+
+        if (favoriteButton) {
+
+            const id =
+                favoriteButton.dataset.id;
+
+
+            if (
+                favorites.includes(id)
+            ) {
+
+                favorites =
+                    favorites.filter(
+                        function(item) {
+
+                            return item !== id;
+
+                        }
+                    );
+
+
+                favoriteButton.classList.remove(
+                    "active"
+                );
+
+
+                favoriteButton.textContent =
+                    "♡";
+
+
+                showToast(
+                    "از علاقه‌مندی‌ها حذف شد"
+                );
+
+            }
+
+            else {
+
+                favorites.push(id);
+
+
+                favoriteButton.classList.add(
+                    "active"
+                );
+
+
+                favoriteButton.textContent =
+                    "♥";
+
+
+                showToast(
+                    "به علاقه‌مندی‌ها اضافه شد ❤️"
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "flowtechFavorites",
+                JSON.stringify(
+                    favorites
+                )
+            );
+
+        }
+
+
+        if (copyButton) {
+
+            const name =
+                copyButton.dataset.name;
+
+
+            try {
+
+                await navigator.clipboard
+                    .writeText(name);
+
+                showToast(
+                    "نام محصول کپی شد ✓"
+                );
+
+            }
+
+            catch {
+
+                showToast(
+                    "کپی نام انجام نشد"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+function showToast(message) {
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            function() {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    function() {
+
+        if (
+            window.scrollY > 450
+        ) {
+
+            backToTop.classList.add(
+                "show"
+            );
+
+        }
+
+        else {
+
+            backToTop.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+backToTop.addEventListener(
+    "click",
+    function() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        navLinks.classList.toggle(
+            "active"
+        );
+
+
+        document.body.classList.toggle(
+            "menu-open"
+        );
+
+
+        if (
+            navLinks.classList.contains(
+                "active"
+            )
+        ) {
+
+            menuButton.textContent =
+                "✕";
+
+        }
+
+        else {
+
+            menuButton.textContent =
+                "☰";
+
+        }
+
+    }
+);
+
+
+navLinks
+    .querySelectorAll("a")
+    .forEach(function(link) {
+
+        link.addEventListener(
+            "click",
+            function() {
+
+                navLinks.classList.remove(
+                    "active"
+                );
+
+
+                document.body.classList.remove(
+                    "menu-open"
+                );
+
+
+                menuButton.textContent =
+                    "☰";
+
+            }
+        );
+
+    });
+
+
+const now =
+    new Date();
+
+
+document.getElementById(
+    "lastUpdate"
+).textContent =
+    "آخرین بروزرسانی: "
+    +
+    now.toLocaleDateString(
+        "fa-IR"
+    );
+
+
+/* اجرای اولیه */
+
+renderProducts();
+
+updateProducts();
+
+loadFavorites();
+
+filterProducts();
+
+</script>
+
+</body>
+
+</html>
