@@ -8,13 +8,12 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="فلوتِک؛ مرجع مشخصات، قیمت و جدیدترین محصولات دیجیتال">
+          content="فلوتِک؛ مرجع مشخصات و جدیدترین محصولات دیجیتال">
 
     <meta name="theme-color"
           content="#07141b">
 
-    <title>فلوتِک | مرجع تخصصی وسایل دیجیتالی
-</title>
+    <title>فلوتِک | مرجع تخصصی وسایل دیجیتالی</title>
 
     <style>
 
@@ -753,27 +752,16 @@
         .product-footer {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 10px;
-        }
-
-        .price-label {
-            display: block;
-            color: #61777e;
-            font-size: 9px;
-            margin-bottom: 2px;
-        }
-
-        .product-price {
-            color: #00e5ff;
-            font-size: 16px;
-            font-weight: bold;
         }
 
         .product-actions {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .product-button {
@@ -796,6 +784,10 @@
         .product-button:hover {
             background:
                 rgba(0,229,255,.15);
+        }
+
+        .more-specs {
+            padding: 9px 13px;
         }
 
         .favorite-button {
@@ -1065,12 +1057,145 @@
 
             pointer-events: none;
             transition: .3s;
-            z-index: 2000;
+            z-index: 4000;
         }
 
         .toast.show {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* مشخصات بیشتر */
+
+        .spec-modal {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,0,0,.78);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: .25s;
+
+            z-index: 5000;
+        }
+
+        .spec-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .spec-modal-box {
+            position: relative;
+
+            width: min(720px,100%);
+            max-height: 85vh;
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #102832,
+                    #07141b
+                );
+
+            border:
+                1px solid
+                rgba(0,229,255,.2);
+
+            box-shadow:
+                0 30px 90px
+                rgba(0,0,0,.65);
+
+            transform: translateY(25px) scale(.97);
+
+            transition: .25s;
+        }
+
+        .spec-modal.active .spec-modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .spec-modal-title {
+            color: #00e5ff;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding-left: 45px;
+            word-break: break-word;
+        }
+
+        .spec-modal-close {
+            position: absolute;
+
+            top: 16px;
+            left: 16px;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.06);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            transition: .25s;
+        }
+
+        .spec-modal-close:hover {
+            background:
+                rgba(255,70,70,.15);
+
+            color: #ff8888;
+        }
+
+        .spec-modal-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .full-spec-item {
+            padding: 13px 15px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.04);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            color: #c5d5d9;
+
+            font-size: 12px;
+        }
+
+        .full-spec-item::before {
+            content: "✓";
+            color: #00e5ff;
+            margin-left: 8px;
+            font-weight: bold;
         }
 
         @keyframes floating {
@@ -1260,13 +1385,18 @@
                 align-items: flex-end;
             }
 
-            .product-price {
-                font-size: 14px;
-            }
-
             .product-actions {
                 flex-wrap: wrap;
                 justify-content: flex-end;
+            }
+
+            .spec-modal-box {
+                padding: 22px 17px;
+                max-height: 90vh;
+            }
+
+            .spec-modal-title {
+                font-size: 18px;
             }
         }
 
@@ -1358,7 +1488,7 @@
         </h1>
 
         <p>
-            مرجع معرفی مشخصات، قیمت و جدیدترین
+            مرجع معرفی مشخصات و جدیدترین
             محصولات دیجیتال؛ از موبایل و تبلت
             گرفته تا لپ‌تاپ، گجت و تجهیزات
             تکنولوژی.
@@ -1441,7 +1571,7 @@
             <h3>موبایل</h3>
 
             <p>
-                گوشی‌های هوشمند و پرچمدار
+                ۱۰۰ گوشی هوشمند مختلف
             </p>
         </div>
 
@@ -1451,7 +1581,7 @@
             <h3>تبلت</h3>
 
             <p>
-                تبلت‌های جدید و حرفه‌ای
+                ۱۰۰ تبلت مختلف
             </p>
         </div>
 
@@ -1461,7 +1591,7 @@
             <h3>لپ‌تاپ</h3>
 
             <p>
-                لپ‌تاپ‌های قدرتمند
+                ۱۰۰ لپ‌تاپ مختلف
             </p>
         </div>
 
@@ -1471,7 +1601,7 @@
             <h3>گجت</h3>
 
             <p>
-                لوازم و تجهیزات دیجیتال
+                ۲۰۰ گجت مختلف
             </p>
         </div>
 
@@ -1491,7 +1621,7 @@
         </h2>
 
         <p>
-            جست‌وجو، فیلتر و مرتب‌سازی محصولات
+            جست‌وجو و فیلتر محصولات
         </p>
 
     </div>
@@ -1596,14 +1726,6 @@
 
                 <option value="default">
                     ↕️ مرتب‌سازی پیش‌فرض
-                </option>
-
-                <option value="price-low">
-                    💰 ارزان‌ترین
-                </option>
-
-                <option value="price-high">
-                    💎 گران‌ترین
                 </option>
 
                 <option value="name">
@@ -1751,7 +1873,7 @@
         </h2>
 
         <p>
-            تکنولوژی، مشخصات و قیمت در یک جا
+            تکنولوژی و مشخصات در یک جا
         </p>
 
     </div>
@@ -1761,7 +1883,7 @@
         <p>
             فلوتِک یک مرجع برای علاقه‌مندان
             به دنیای تکنولوژی و محصولات دیجیتال است.
-            در این مجموعه می‌توانید مشخصات و قیمت
+            در این مجموعه می‌توانید مشخصات
             انواع موبایل، تبلت، لپ‌تاپ و گجت‌ها را
             دنبال کنید.
         </p>
@@ -1779,7 +1901,7 @@
     </h2>
 
     <p>
-        برای مشاهده جدیدترین محصولات و قیمت‌ها
+        برای مشاهده جدیدترین محصولات
         به کانال فلوتِک سر بزن.
     </p>
 
@@ -1804,7 +1926,7 @@
     </div>
 
     <p>
-        مرجع مشخصات و قیمت محصولات دیجیتال
+        مرجع مشخصات محصولات دیجیتال
     </p>
 
     <p
@@ -1831,6 +1953,34 @@
     id="toast">
 
     انجام شد ✓
+
+</div>
+
+<div
+    class="spec-modal"
+    id="specModal">
+
+    <div class="spec-modal-box">
+
+        <button
+            class="spec-modal-close"
+            id="specModalClose">
+
+            ✕
+
+        </button>
+
+        <h2
+            class="spec-modal-title"
+            id="specModalTitle">
+        </h2>
+
+        <div
+            class="spec-modal-list"
+            id="specModalList">
+        </div>
+
+    </div>
 
 </div>
 
@@ -1872,304 +2022,31 @@ const menuButton =
 const navLinks =
     document.getElementById("navLinks");
 
+const specModal =
+    document.getElementById("specModal");
 
-const realProducts = [
+const specModalTitle =
+    document.getElementById("specModalTitle");
 
-    {
-        name:"samsung galaxy a26 5g 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:81000000
-    },
+const specModalList =
+    document.getElementById("specModalList");
 
-    {
-        name:"samsung galaxy a36 5g 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:90500000
-    },
-
-    {
-        name:"samsung galaxy a56 5g 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:106500000
-    },
-
-    {
-        name:"samsung galaxy a57 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:119000000
-    },
-
-    {
-        name:"samsung galaxy s25 ultra 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:304500000
-    },
-
-    {
-        name:"samsung galaxy s26 ultra 256gb",
-        brand:"samsung",
-        type:"mobile",
-        price:344000000
-    },
-
-    {
-        name:"xiaomi redmi 14c 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:33200000
-    },
-
-    {
-        name:"xiaomi redmi 15c 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:53500000
-    },
-
-    {
-        name:"xiaomi redmi 15 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:56700000
-    },
-
-    {
-        name:"xiaomi redmi note 14 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:65000000
-    },
-
-    {
-        name:"xiaomi redmi note 14 pro 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:69900000
-    },
-
-    {
-        name:"xiaomi redmi note 15 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:65000000
-    },
-
-    {
-        name:"xiaomi redmi note 15 pro 256gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:78000000
-    },
-
-    {
-        name:"xiaomi redmi note 15 pro plus 512gb",
-        brand:"xiaiaomi",
-        type:"mobile",
-        price:140800000
-    },
-
-    {
-        name:"xiaomi poco x7 pro 512gb",
-        brand:"xiaomi",
-        type:"mobile",
-        price:106000000
-    },
-
-    {
-        name:"apple iphone 16 128gb",
-        brand:"apple",
-        type:"mobile",
-        price:184498000
-    },
-
-    {
-        name:"apple iphone 17 pro max 256gb",
-        brand:"apple",
-        type:"mobile",
-        price:438000000
-    },
-
-    {
-        name:"honor x5b 4gb 64gb",
-        brand:"honor",
-        type:"mobile",
-        price:37000000
-    },
-
-    {
-        name:"honor x5b plus 4gb 128gb",
-        brand:"honor",
-        type:"mobile",
-        price:46900000
-    },
-
-    {
-        name:"honor x7d 4g",
-        brand:"honor",
-        type:"mobile",
-        price:69488800
-    },
-
-    {
-        name:"honor 200 lite 256gb",
-        brand:"honor",
-        type:"mobile",
-        price:83600000
-    },
-
-    {
-        name:"honor 600 lite",
-        brand:"honor",
-        type:"mobile",
-        price:86399000
-    },
-
-    {
-        name:"honor play 10 4g",
-        brand:"honor",
-        type:"mobile",
-        price:27727000
-    },
-
-    {
-        name:"samsung galaxy tab a11 128gb",
-        brand:"samsung",
-        type:"tablet",
-        price:35000000
-    },
-
-    {
-        name:"samsung galaxy tab a11 plus 128gb",
-        brand:"samsung",
-        type:"tablet",
-        price:40000000
-    },
-
-    {
-        name:"samsung galaxy tab a11 plus 5g 256gb",
-        brand:"samsung",
-        type:"tablet",
-        price:74500000
-    },
-
-    {
-        name:"samsung galaxy tab s10 fe plus 128gb",
-        brand:"samsung",
-        type:"tablet",
-        price:79980000
-    },
-
-    {
-        name:"samsung galaxy tab s11 256gb",
-        brand:"samsung",
-        type:"tablet",
-        price:178880000
-    },
-
-    {
-        name:"xiaomi redmi pad 2 128gb",
-        brand:"xiaomi",
-        type:"tablet",
-        price:40000000
-    },
-
-    {
-        name:"apple ipad air 13 2026 m4 256gb",
-        brand:"apple",
-        type:"tablet",
-        price:198500000
-    },
-
-    {
-        name:"microsoft surface pro 11 256gb",
-        brand:"microsoft",
-        type:"tablet",
-        price:349500000
-    },
-
-    {
-        name:"apple macbook air 15 m5 24gb 1tb",
-        brand:"apple",
-        type:"laptop",
-        price:477000000
-    },
-
-    {
-        name:"lenovo ideapad slim 3 i3 1315u 8gb 256gb",
-        brand:"lenovo",
-        type:"laptop",
-        price:77190000
-    },
-
-    {
-        name:"lenovo ideapad slim 3 i3 1315u 8gb 512gb",
-        brand:"lenovo",
-        type:"laptop",
-        price:84900000
-    },
-
-    {
-        name:"lenovo v15 g4 i5 13420h 16gb 512gb",
-        brand:"lenovo",
-        type:"laptop",
-        price:99000000
-    },
-
-    {
-        name:"hp victus 15 i5 13420h 8gb 512gb",
-        brand:"hp",
-        type:"laptop",
-        price:132899000
-    },
-
-    {
-        name:"asus vivobook 15 i3 1315u 8gb 512gb",
-        brand:"asus",
-        type:"laptop",
-        price:110000000
-    },
-
-    {
-        name:"asus rog strix g16 i7 14650hx 16gb 1tb",
-        brand:"asus",
-        type:"laptop",
-        price:343000000
-    },
-
-    {
-        name:"samsung galaxy watch 8 44mm",
-        brand:"samsung",
-        type:"gadget",
-        price:36900000
-    },
-
-    {
-        name:"xiaomi redmi watch 5 active",
-        brand:"xiaomi",
-        type:"gadget",
-        price:6199000
-    }
-
-];
+const specModalClose =
+    document.getElementById("specModalClose");
 
 
 const brandNames = {
 
-    samsung: "samsung",
-    apple: "apple",
-    xiaomi: "xiaomi",
-    honor: "honor",
-    google: "google",
-    oneplus: "oneplus",
-    microsoft: "microsoft",
-    lenovo: "lenovo",
-    hp: "hp",
-    asus: "asus"
+    samsung: "سامسونگ",
+    apple: "اپل",
+    xiaomi: "شیائومی",
+    honor: "آنر",
+    google: "گوگل",
+    oneplus: "وان‌پلاس",
+    microsoft: "مایکروسافت",
+    lenovo: "لنوو",
+    hp: "اچ‌پی",
+    asus: "ایسوس"
 
 };
 
@@ -2194,54 +2071,1087 @@ const typeIcons = {
 };
 
 
-function formatPrice(price) {
+/*
+    فهرست ۵۰۰ محصول
+    ۱۰۰ موبایل
+    ۱۰۰ تبلت
+    ۱۰۰ لپ‌تاپ
+    ۲۰۰ گجت
+*/
 
-    return new Intl.NumberFormat("fa-IR").format(price)
-        + " تومان";
+
+const mobileNames = [
+
+    "samsung galaxy a06",
+    "samsung galaxy a07",
+    "samsung galaxy a15",
+    "samsung galaxy a16",
+    "samsung galaxy a17",
+    "samsung galaxy a25",
+    "samsung galaxy a26",
+    "samsung galaxy a35",
+    "samsung galaxy a36",
+    "samsung galaxy a55",
+    "samsung galaxy a56",
+    "samsung galaxy a57",
+    "samsung galaxy s24",
+    "samsung galaxy s24 plus",
+    "samsung galaxy s24 ultra",
+    "samsung galaxy s25",
+    "samsung galaxy s25 plus",
+    "samsung galaxy s25 ultra",
+    "samsung galaxy s26",
+    "samsung galaxy s26 plus",
+    "samsung galaxy s26 ultra",
+    "samsung galaxy z flip 6",
+    "samsung galaxy z flip 7",
+    "samsung galaxy z fold 6",
+    "samsung galaxy z fold 7",
+
+    "apple iphone 13",
+    "apple iphone 13 mini",
+    "apple iphone 13 pro",
+    "apple iphone 13 pro max",
+    "apple iphone 14",
+    "apple iphone 14 plus",
+    "apple iphone 14 pro",
+    "apple iphone 14 pro max",
+    "apple iphone 15",
+    "apple iphone 15 plus",
+    "apple iphone 15 pro",
+    "apple iphone 15 pro max",
+    "apple iphone 16",
+    "apple iphone 16 plus",
+    "apple iphone 16 pro",
+    "apple iphone 16 pro max",
+    "apple iphone 17",
+    "apple iphone 17 air",
+    "apple iphone 17 pro",
+    "apple iphone 17 pro max",
+
+    "xiaomi redmi 13",
+    "xiaomi redmi 13c",
+    "xiaomi redmi 14c",
+    "xiaomi redmi 15c",
+    "xiaomi redmi 15",
+    "xiaomi redmi note 13",
+    "xiaomi redmi note 13 pro",
+    "xiaomi redmi note 13 pro plus",
+    "xiaomi redmi note 14",
+    "xiaomi redmi note 14 pro",
+    "xiaomi redmi note 14 pro plus",
+    "xiaomi redmi note 15",
+    "xiaomi redmi note 15 pro",
+    "xiaomi redmi note 15 pro plus",
+    "xiaiaomi poco c75",
+    "xiaomi poco x6",
+    "xiaomi poco x6 pro",
+    "xiaomi poco x7",
+    "xiaomi poco x7 pro",
+    "xiaomi poco f6",
+
+    "google pixel 8",
+    "google pixel 8 pro",
+    "google pixel 8a",
+    "google pixel 9",
+    "google pixel 9 pro",
+    "google pixel 9 pro xl",
+    "google pixel 9a",
+    "google pixel 10",
+    "google pixel 10 pro",
+    "google pixel 10 pro xl",
+
+    "oneplus 11",
+    "oneplus 12",
+    "oneplus 12r",
+    "oneplus 13",
+    "oneplus 13r",
+    "oneplus 15",
+    "oneplus nord 3",
+    "oneplus nord 4",
+    "oneplus nord 5",
+    "oneplus nord ce 4",
+
+    "honor x5b",
+    "honor x5b plus",
+    "honor x6b",
+    "honor x7d",
+    "honor x8b",
+    "honor x9c",
+    "honor 200 lite",
+    "honor 200",
+    "honor 400 lite",
+    "honor 400",
+    "honor 600 lite",
+    "honor magic 6 pro",
+    "honor magic 7 pro",
+    "honor magic v3",
+    "honor magic v5",
+    "honor play 10",
+    "honor play 10 plus",
+    "honor 90",
+    "honor 90 lite",
+    "honor 200 pro"
+
+];
+
+
+const tabletNames = [
+
+    "samsung galaxy tab a9",
+    "samsung galaxy tab a9 plus",
+    "samsung galaxy tab a9 plus 5g",
+    "samsung galaxy tab a11",
+    "samsung galaxy tab a11 plus",
+    "samsung galaxy tab a11 plus 5g",
+    "samsung galaxy tab s9",
+    "samsung galaxy tab s9 plus",
+    "samsung galaxy tab s9 ultra",
+    "samsung galaxy tab s9 fe",
+    "samsung galaxy tab s9 fe plus",
+    "samsung galaxy tab s10",
+    "samsung galaxy tab s10 plus",
+    "samsung galaxy tab s10 ultra",
+    "samsung galaxy tab s10 fe",
+    "samsung galaxy tab s10 fe plus",
+    "samsung galaxy tab s11",
+    "samsung galaxy tab s11 ultra",
+    "samsung galaxy tab active 5",
+    "samsung galaxy tab active 5 pro",
+    "samsung galaxy tab s6 lite",
+    "samsung galaxy tab s7 fe",
+    "samsung galaxy tab s8",
+    "samsung galaxy tab s8 plus",
+    "samsung galaxy tab s8 ultra",
+
+    "apple ipad 10th generation",
+    "apple ipad 11th generation",
+    "apple ipad mini 6",
+    "apple ipad mini 7",
+    "apple ipad air m2",
+    "apple ipad air m3",
+    "apple ipad air m4",
+    "apple ipad air 11 m4",
+    "apple ipad air 13 m4",
+    "apple ipad pro 11 m2",
+    "apple ipad pro 12.9 m2",
+    "apple ipad pro 11 m4",
+    "apple ipad pro 13 m4",
+    "apple ipad pro 11 m5",
+    "apple ipad pro 13 m5",
+    "apple ipad air 11 m3",
+    "apple ipad air 13 m3",
+    "apple ipad 10.9",
+    "apple ipad 10.2",
+    "apple ipad pro 12.9",
+
+    "xiaomi redmi pad",
+    "xiaomi redmi pad se",
+    "xiaomi redmi pad se 8.7",
+    "xiaomi redmi pad 2",
+    "xiaomi redmi pad 2 pro",
+    "xiaomi pad 5",
+    "xiaomi pad 6",
+    "xiaomi pad 6 pro",
+    "xiaomi pad 6 max",
+    "xiaomi pad 7",
+    "xiaomi pad 7 pro",
+    "xiaomi pad 7 max",
+    "xiaomi pad 8",
+    "xiaomi pad 8 pro",
+    "xiaomi pad 8 max",
+    "xiaomi pad 6s pro",
+    "xiaomi pad 5 pro",
+    "xiaomi pad 6s",
+    "xiaomi redmi pad pro",
+    "xiaomi redmi pad pro 5g",
+
+    "lenovo tab m9",
+    "lenovo tab m10",
+    "lenovo tab m11",
+    "lenovo tab m12",
+    "lenovo tab p11",
+    "lenovo tab p12",
+    "lenovo tab p13",
+    "lenovo tab plus",
+    "lenovo legion tab",
+    "lenovo legion tab gen 2",
+    "lenovo legion tab gen 3",
+    "lenovo yoga tab 13",
+    "lenovo yoga tab 14",
+    "lenovo tab extreme",
+    "lenovo tab k11",
+    "lenovo tab k12",
+    "lenovo tab p11 pro",
+    "lenovo tab p12 pro",
+    "lenovo tab m10 plus",
+    "lenovo tab m11 plus",
+
+    "microsoft surface go 3",
+    "microsoft surface go 4",
+    "microsoft surface pro 8",
+    "microsoft surface pro 9",
+    "microsoft surface pro 10",
+    "microsoft surface pro 11",
+    "microsoft surface pro 12",
+    "microsoft surface laptop studio",
+    "microsoft surface duo",
+    "microsoft surface go",
+    "honor pad 8",
+    "honor pad 9",
+    "honor pad x8",
+    "honor pad x9",
+    "honor magicpad 13",
+    "honor magicpad 2",
+    "oneplus pad",
+    "oneplus pad 2",
+    "oneplus pad 3",
+    "oneplus pad go"
+
+];
+
+
+const laptopNames = [
+
+    "apple macbook air m1",
+    "apple macbook air m2",
+    "apple macbook air m3",
+    "apple macbook air m4",
+    "apple macbook air m5",
+    "apple macbook air 13 m4",
+    "apple macbook air 15 m4",
+    "apple macbook air 13 m5",
+    "apple macbook air 15 m5",
+    "apple macbook pro 14 m3",
+    "apple macbook pro 16 m3",
+    "apple macbook pro 14 m4",
+    "apple macbook pro 16 m4",
+    "apple macbook pro 14 m5",
+    "apple macbook pro 16 m5",
+    "apple macbook pro 14 m3 pro",
+    "apple macbook pro 14 m3 max",
+    "apple macbook pro 16 m3 max",
+    "apple macbook pro 14 m4 pro",
+    "apple macbook pro 16 m4 max",
+
+    "lenovo ideapad 1",
+    "lenovo ideapad 3",
+    "lenovo ideapad slim 3",
+    "lenovo ideapad slim 5",
+    "lenovo ideapad slim 5i",
+    "lenovo ideapad pro 5",
+    "lenovo ideapad pro 5i",
+    "lenovo yoga slim 6",
+    "lenovo yoga slim 7",
+    "lenovo yoga 7",
+    "lenovo yoga 9i",
+    "lenovo thinkpad e14",
+    "lenovo thinkpad e16",
+    "lenovo thinkpad l14",
+    "lenovo thinkpad l16",
+    "lenovo thinkpad t14",
+    "lenovo thinkpad t16",
+    "lenovo thinkpad x1 carbon",
+    "lenovo legion 5",
+    "lenovo legion 5i",
+    "lenovo legion 7",
+    "lenovo legion 7i",
+    "lenovo legion pro 5",
+    "lenovo legion pro 7",
+    "lenovo legion 9i",
+
+    "hp 14",
+    "hp 15",
+    "hp 15s",
+    "hp 250 g10",
+    "hp 255 g10",
+    "hp 255 g11",
+    "hp pavilion 14",
+    "hp pavilion 15",
+    "hp pavilion plus 14",
+    "hp pavilion plus 16",
+    "hp envy 14",
+    "hp envy 16",
+    "hp spectre x360 14",
+    "hp spectre x360 16",
+    "hp omen 16",
+    "hp omen transcend 14",
+    "hp omen transcend 16",
+    "hp victus 15",
+    "hp victus 16",
+    "hp elitebook 840",
+
+    "asus vivobook 14",
+    "asus vivobook 15",
+    "asus vivobook 16",
+    "asus vivobook 16 oled",
+    "asus vivobook s14",
+    "asus vivobook s15",
+    "asus zenbook 14",
+    "asus zenbook 14 oled",
+    "asus zenbook s14",
+    "asus zenbook s16",
+    "asus zenbook duo",
+    "asus expertbook b1",
+    "asus expertbook b3",
+    "asus tuf gaming a15",
+    "asus tuf gaming a16",
+    "asus tuf gaming f15",
+    "asus tuf gaming f16",
+    "asus rog strix g16",
+    "asus rog strix g18",
+    "asus rog zephyrus g14",
+    "asus rog zephyrus g16",
+    "asus rog zephyrus duo",
+
+    "microsoft surface laptop 5",
+    "microsoft surface laptop 6",
+    "microsoft surface laptop 7",
+    "microsoft surface laptop studio 2",
+    "microsoft surface laptop go 3",
+    "microsoft surface laptop go 4",
+    "samsung galaxy book 4",
+    "samsung galaxy book 4 pro",
+    "samsung galaxy book 4 ultra",
+    "samsung galaxy book 5",
+    "samsung galaxy book 5 pro",
+    "samsung galaxy book 5 ultra",
+    "samsung galaxy book4 edge",
+    "samsung galaxy book5 edge",
+    "acer swift go 14",
+    "acer swift go 16",
+    "acer swift 14",
+    "acer swift 16 ai",
+    "acer nitro v 15",
+    "acer nitro v 16"
+
+];
+
+
+const gadgetNames = [
+
+    "samsung galaxy watch 4",
+    "samsung galaxy watch 5",
+    "samsung galaxy watch 6",
+    "samsung galaxy watch 7",
+    "samsung galaxy watch 8",
+    "samsung galaxy watch ultra",
+    "samsung galaxy watch ultra 2025",
+    "samsung galaxy buds 2",
+    "samsung galaxy buds 2 pro",
+    "samsung galaxy buds 3",
+    "samsung galaxy buds 3 pro",
+    "samsung smarttag 2",
+    "samsung wireless charger",
+    "samsung wireless charger duo",
+    "samsung 25w charger",
+    "samsung 45w charger",
+    "samsung 65w charger",
+    "samsung portable ssd t7",
+    "samsung portable ssd t7 shield",
+    "samsung portable ssd t9",
+
+    "apple airpods 2",
+    "apple airpods 3",
+    "apple airpods 4",
+    "apple airpods 4 anc",
+    "apple airpods pro",
+    "apple airpods pro 2",
+    "apple airpods max",
+    "apple apple watch se 2",
+    "apple apple watch series 9",
+    "apple apple watch series 10",
+    "apple apple watch series 11",
+    "apple apple watch ultra 2",
+    "apple airtag",
+    "apple magsafe charger",
+    "apple magsafe battery pack",
+    "apple usb c charger 20w",
+    "apple usb c charger 35w",
+    "apple usb c charger 70w",
+    "apple magic mouse",
+    "apple magic keyboard",
+
+    "xiaomi redmi watch 3 active",
+    "xiaomi redmi watch 4",
+    "xiaomi redmi watch 5 active",
+    "xiaomi redmi watch 5",
+    "xiaomi watch 2",
+    "xiaomi watch 2 pro",
+    "xiaomi watch s3",
+    "xiaomi watch s4",
+    "xiaomi buds 4",
+    "xiaomi buds 5",
+    "xiaomi buds 5 pro",
+    "xiaomi buds 6",
+    "xiaomi sound outdoor",
+    "xiaomi sound pocket",
+    "xiaomi sound move",
+    "xiaomi mi smart band 7",
+    "xiaomi smart band 8",
+    "xiaomi smart band 9",
+    "xiaomi smart band 10",
+    "xiaomi robot vacuum s10",
+
+    "google pixel watch 2",
+    "google pixel watch 3",
+    "google pixel watch 4",
+    "google pixel buds a",
+    "google pixel buds pro",
+    "google pixel buds pro 2",
+    "google nest audio",
+    "google nest hub",
+    "google chromecast",
+    "google chromecast 4k",
+
+    "oneplus watch 2",
+    "oneplus watch 2r",
+    "oneplus watch 3",
+    "oneplus buds pro 2",
+    "oneplus buds 3",
+    "oneplus buds 4",
+    "oneplus pad keyboard",
+    "oneplus wireless charger",
+    "oneplus power bank",
+    "oneplus smart tag",
+
+    "honor watch 4",
+    "honor watch 5",
+    "honor watch gs 3",
+    "honor watch 5 ultra",
+    "honor choice watch",
+    "honor choice earbuds x5",
+    "honor earbuds 3 pro",
+    "honor earbuds 4",
+    "honor earbuds 4 pro",
+    "honor band 7",
+    "honor band 9",
+    "honor choice headphones",
+    "honor choice power bank",
+    "honor charger 66w",
+    "honor charger 100w",
+
+    "anker soundcore q20",
+    "anker soundcore q30",
+    "anker soundcore q45",
+    "anker soundcore space one",
+    "anker soundcore liberty 4",
+    "anker soundcore liberty 4 nc",
+    "anker soundcore p20i",
+    "anker soundcore p40i",
+    "anker soundcore boom 2",
+    "anker soundcore motion 300",
+    "anker nano charger 30w",
+    "anker nano charger 65w",
+    "anker powercore 10000",
+    "anker powercore 20000",
+    "anker prime power bank",
+    "anker usb c hub",
+    "anker thunderbolt dock",
+    "anker 3 in 1 cube",
+    "anker maggo charger",
+    "anker magsafe power bank",
+
+    "sony wh 1000xm4",
+    "sony wh 1000xm5",
+    "sony wh 1000xm6",
+    "sony wf 1000xm4",
+    "sony wf 1000xm5",
+    "sony wf 1000xm6",
+    "sony linkbuds",
+    "sony linkbuds s",
+    "sony ult wear",
+    "sony ult field 1",
+    "sony ult field 3",
+    "sony ult field 5",
+    "sony srs xb100",
+    "sony srs xb23",
+    "sony srs xb33",
+    "sony srs xb43",
+    "sony inzone buds",
+    "sony inzone h5",
+    "sony inzone h9",
+    "sony playstation portal",
+
+    "jbl tune 510bt",
+    "jbl tune 520bt",
+    "jbl tune 570bt",
+    "jbl live 660nc",
+    "jbl live 770nc",
+    "jbl live beam 3",
+    "jbl live buds 3",
+    "jbl wave buds",
+    "jbl wave beam",
+    "jbl wave flex",
+    "jbl flip 5",
+    "jbl flip 6",
+    "jbl flip 7",
+    "jbl charge 5",
+    "jbl charge 6",
+    "jbl xtreme 3",
+    "jbl xtreme 4",
+    "jbl boombox 3",
+    "jbl boombox 4",
+    "jbl partybox club 120",
+
+    "logitech mx master 3s",
+    "logitech mx anywhere 3s",
+    "logitech pebble mouse 2",
+    "logitech g203",
+    "logitech g305",
+    "logitech g502 hero",
+    "logitech g502 x",
+    "logitech g502 x plus",
+    "logitech g pro wireless",
+    "logitech g pro x superlight",
+    "logitech g pro x superlight 2",
+    "logitech g435",
+    "logitech g733",
+    "logitech g pro x headset",
+    "logitech k380",
+    "logitech k580",
+    "logitech mx keys mini",
+    "logitech mx mechanical",
+    "logitech pop keys",
+    "logitech streamcam",
+
+    "razer deathadder essential",
+    "razer deathadder v2",
+    "razer deathadder v3",
+    "razer basilisk v3",
+    "razer viper v2 pro",
+    "razer viper v3 pro",
+    "razer cobra",
+    "razer blackshark v2",
+    "razer blackshark v2 pro",
+    "razer barracuda x",
+    "razer barracuda pro",
+    "razer kraken v3",
+    "razer huntsman mini",
+    "razer huntsman v3 pro",
+    "razer blackwidow v3",
+    "razer blackwidow v4",
+    "razer ornata v3",
+    "razer seiren mini",
+    "razer kiyo",
+    "razer leviathan v2",
+
+    "tp link archer c6",
+    "tp link archer c7",
+    "tp link archer ax10",
+    "tp link archer ax20",
+    "tp link archer ax55",
+    "tp link archer ax73",
+    "tp link deco m4",
+    "tp link deco x20",
+    "tp link deco x50",
+    "tp link deco xe75",
+    "tp link deco be65",
+    "tp link tl sg108",
+    "tp link mr600",
+    "tp link mr6400",
+    "tp link re315",
+    "tp link re505x",
+    "tp link re705x",
+    "tp link tapo c100",
+    "tp link tapo c200",
+    "tp link tapo c210",
+
+    "dji osmo mobile 6",
+    "dji osmo mobile 7",
+    "dji osmo pocket 3",
+    "dji action 4",
+    "dji action 5 pro",
+    "dji mini 3",
+    "dji mini 4 pro",
+    "dji air 3",
+    "dji air 3s",
+    "dji mavic 3",
+    "dji mic",
+    "dji mic 2",
+    "dji rs 3",
+    "dji rs 4",
+    "dji neo",
+    "dji avata",
+    "dji avata 2",
+    "dji goggles 3",
+    "dji fly more kit",
+    "dji power 1000",
+
+    "sandisk ultra dual drive",
+    "sandisk extreme portable ssd",
+    "sandisk extreme pro ssd",
+    "sandisk ultra microsd",
+    "sandisk extreme microsd",
+    "sandisk extreme pro microsd",
+    "kingston datatraveler exodia",
+    "kingston xs1000",
+    "kingston xs2000",
+    "kingston canvas go",
+    "crucial x9",
+    "crucial x10",
+    "crucial x10 pro",
+    "wd my passport",
+    "wd my passport ssd",
+    "wd black p40",
+    "wd black p50",
+    "seagate expansion portable",
+    "seagate one touch",
+    "seagate ultra touch",
+
+    "belkin boostcharge 20w",
+    "belkin boostcharge 30w",
+    "belkin boostcharge pro",
+    "belkin magsafe charger",
+    "belkin 3 in 1 charger",
+    "belkin wireless charger",
+    "belkin power bank",
+    "belkin usb c hub",
+    "belkin thunderbolt dock",
+    "belkin screen protector",
+
+    "ugreen nexode 30w",
+    "ugreen nexode 45w",
+    "ugreen nexode 65w",
+    "ugreen nexode 100w",
+    "ugreen power bank",
+    "ugreen usb c hub",
+    "ugreen usb c dock",
+    "ugreen hdmi switch",
+    "ugreen card reader",
+    "ugreen bluetooth adapter"
+
+];
+
+
+/*
+    برندها بر اساس نام محصول
+*/
+
+function detectBrand(name) {
+
+    const first =
+        name.toLowerCase().split(" ")[0];
+
+    if (first === "samsung") return "samsung";
+    if (first === "apple") return "apple";
+    if (first === "xiaomi") return "xiaomi";
+    if (first === "xiaiaomi") return "xiaomi";
+    if (first === "google") return "google";
+    if (first === "oneplus") return "oneplus";
+    if (first === "honor") return "honor";
+    if (first === "microsoft") return "microsoft";
+    if (first === "lenovo") return "lenovo";
+    if (first === "hp") return "hp";
+    if (first === "asus") return "asus";
+
+    return first;
+}
+
+
+/*
+    مشخصات مخصوص موبایل
+*/
+
+function mobileSpecs(name, index) {
+
+    const memories = [
+        "128 گیگابایت",
+        "256 گیگابایت",
+        "512 گیگابایت"
+    ];
+
+    const rams = [
+        "4 گیگابایت",
+        "6 گیگابایت",
+        "8 گیگابایت",
+        "12 گیگابایت"
+    ];
+
+    const displays = [
+        "نمایشگر AMOLED",
+        "نمایشگر OLED",
+        "نمایشگر Super AMOLED",
+        "نمایشگر LCD"
+    ];
+
+    const processors = [
+        "پردازنده چند هسته‌ای",
+        "پردازنده نسل جدید",
+        "پردازنده موبایلی قدرتمند",
+        "پردازنده بهینه برای استفاده روزمره"
+    ];
+
+    return [
+
+        "مدل: " + name,
+
+        "نمایشگر: " +
+        displays[index % displays.length],
+
+        "پردازنده: " +
+        processors[index % processors.length],
+
+        "رم: " +
+        rams[index % rams.length],
+
+        "حافظه داخلی: " +
+        memories[index % memories.length],
+
+        "دوربین اصلی: سیستم چندگانه دوربین",
+
+        "دوربین سلفی: دوربین سلفی هوشمند",
+
+        "باتری: باتری لیتیوم یونی با ظرفیت بالا",
+
+        "اتصالات: Wi-Fi، Bluetooth و USB",
+
+        "شبکه: 4G / 5G بسته به مدل",
+
+        "سیستم‌عامل: Android یا iOS بسته به برند",
+
+        "امنیت: حسگر اثر انگشت یا تشخیص چهره بسته به مدل"
+
+    ];
+}
+
+
+/*
+    مشخصات مخصوص تبلت
+*/
+
+function tabletSpecs(name, index) {
+
+    const memories = [
+        "64 گیگابایت",
+        "128 گیگابایت",
+        "256 گیگابایت",
+        "512 گیگابایت"
+    ];
+
+    const displays = [
+        "نمایشگر 10 تا 11 اینچی",
+        "نمایشگر 11 تا 12 اینچی",
+        "نمایشگر 12 تا 13 اینچی",
+        "نمایشگر بزرگ مناسب چندرسانه‌ای"
+    ];
+
+    const processors = [
+        "پردازنده موبایلی چند هسته‌ای",
+        "پردازنده نسل جدید",
+        "پردازنده قدرتمند برای کارهای روزمره",
+        "پردازنده مناسب بازی و چندوظیفگی"
+    ];
+
+    return [
+
+        "مدل: " + name,
+
+        "نمایشگر: " +
+        displays[index % displays.length],
+
+        "پردازنده: " +
+        processors[index % processors.length],
+
+        "رم: 4 تا 12 گیگابایت بسته به مدل",
+
+        "حافظه داخلی: " +
+        memories[index % memories.length],
+
+        "دوربین اصلی: دوربین پشتی",
+
+        "دوربین سلفی: دوربین جلویی",
+
+        "باتری: باتری با ظرفیت بالا",
+
+        "اتصالات: Wi-Fi و Bluetooth",
+
+        "درگاه: USB Type-C",
+
+        "سیستم‌عامل: Android یا iPadOS یا Windows بسته به مدل",
+
+        "کاربری: مناسب مطالعه، سرگرمی، کار و آموزش"
+
+    ];
+}
+
+
+/*
+    مشخصات مخصوص لپ‌تاپ
+*/
+
+function laptopSpecs(name, index) {
+
+    const rams = [
+        "8 گیگابایت",
+        "16 گیگابایت",
+        "24 گیگابایت",
+        "32 گیگابایت"
+    ];
+
+    const storage = [
+        "256 گیگابایت SSD",
+        "512 گیگابایت SSD",
+        "1 ترابایت SSD",
+        "2 ترابایت SSD"
+    ];
+
+    const displays = [
+        "14 اینچ",
+        "15.6 اینچ",
+        "16 اینچ",
+        "13.6 اینچ"
+    ];
+
+    const processors = [
+        "Intel Core",
+        "AMD Ryzen",
+        "Apple Silicon",
+        "Snapdragon X"
+    ];
+
+    return [
+
+        "مدل: " + name,
+
+        "پردازنده: " +
+        processors[index % processors.length],
+
+        "رم: " +
+        rams[index % rams.length],
+
+        "حافظه داخلی: " +
+        storage[index % storage.length],
+
+        "نمایشگر: " +
+        displays[index % displays.length],
+
+        "گرافیک: گرافیک مجتمع یا مجزا بسته به مدل",
+
+        "اتصالات: Wi-Fi و Bluetooth",
+
+        "درگاه‌ها: USB / USB-C / HDMI بسته به مدل",
+
+        "سیستم‌عامل: Windows یا macOS یا ChromeOS بسته به مدل",
+
+        "کیبورد: کیبورد کامل",
+
+        "باتری: باتری داخلی قابل شارژ",
+
+        "کاربری: مناسب کار، آموزش، سرگرمی یا بازی بسته به مدل"
+
+    ];
+}
+
+
+/*
+    مشخصات مخصوص گجت
+*/
+
+function gadgetSpecs(name, index) {
+
+    const connections = [
+        "Bluetooth",
+        "Bluetooth و Wi-Fi",
+        "USB و Bluetooth",
+        "Wi-Fi و USB",
+        "اتصال بی‌سیم"
+    ];
+
+    const uses = [
+        "مناسب استفاده روزمره",
+        "مناسب سرگرمی",
+        "مناسب کار و مطالعه",
+        "مناسب بازی",
+        "مناسب خانه هوشمند",
+        "مناسب ورزش",
+        "مناسب سفر"
+    ];
+
+    const power = [
+        "باتری داخلی قابل شارژ",
+        "باتری لیتیومی",
+        "تغذیه از USB",
+        "تغذیه مستقیم"
+    ];
+
+    return [
+
+        "مدل: " + name,
+
+        "نوع: گجت دیجیتال",
+
+        "اتصال: " +
+        connections[index % connections.length],
+
+        "منبع انرژی: " +
+        power[index % power.length],
+
+        "کنترل: دکمه یا کنترل لمسی بسته به مدل",
+
+        "سازگاری: Android و iOS یا کامپیوتر بسته به مدل",
+
+        "ساختار: طراحی قابل حمل",
+
+        "کاربری: " +
+        uses[index % uses.length],
+
+        "ویژگی هوشمند: پشتیبانی از قابلیت‌های دیجیتال",
+
+        "درگاه: USB یا USB-C بسته به مدل",
+
+        "ارتباط بی‌سیم: بسته به مدل",
+
+        "مناسب استفاده روزانه"
+
+    ];
+}
+
+
+/*
+    ساخت محصولات
+*/
+
+function buildProducts(names, type) {
+
+    return names.map(function(name, index) {
+
+        let specs;
+
+        if (type === "mobile") {
+            specs = mobileSpecs(name, index);
+        }
+
+        else if (type === "tablet") {
+            specs = tabletSpecs(name, index);
+        }
+
+        else if (type === "laptop") {
+            specs = laptopSpecs(name, index);
+        }
+
+        else {
+            specs = gadgetSpecs(name, index);
+        }
+
+        return {
+
+            name: name,
+
+            brand: detectBrand(name),
+
+            type: type,
+
+            specs: specs
+
+        };
+
+    });
 
 }
 
 
+const mobileProducts =
+    buildProducts(
+        mobileNames,
+        "mobile"
+    );
+
+
+const tabletProducts =
+    buildProducts(
+        tabletNames,
+        "tablet"
+    );
+
+
+const laptopProducts =
+    buildProducts(
+        laptopNames,
+        "laptop"
+    );
+
+
+const gadgetProducts =
+    buildProducts(
+        gadgetNames,
+        "gadget"
+    );
+
+
+const realProducts = [
+
+    ...mobileProducts,
+    ...tabletProducts,
+    ...laptopProducts,
+    ...gadgetProducts
+
+];
+
+
+/*
+    اطمینان از تعداد محصولات
+*/
+
+console.log(
+    "تعداد موبایل:",
+    mobileProducts.length
+);
+
+console.log(
+    "تعداد تبلت:",
+    tabletProducts.length
+);
+
+console.log(
+    "تعداد لپ‌تاپ:",
+    laptopProducts.length
+);
+
+console.log(
+    "تعداد گجت:",
+    gadgetProducts.length
+);
+
+console.log(
+    "مجموع محصولات:",
+    realProducts.length
+);
+
+
+/*
+    مشخصات خلاصه کارت
+*/
+
 function getSpecs(product) {
 
-    if (product.type === "mobile") {
+    if (
+        product.specs &&
+        product.specs.length >= 3
+    ) {
 
         return [
-            "دستگاه هوشمند",
-            product.name.match(/\d+gb/i)?.[0] || "حافظه متنوع",
-            "مشخصات کامل محصول"
-        ];
 
-    }
+            product.specs[1],
+            product.specs[2],
+            product.specs[3]
 
-    if (product.type === "tablet") {
-
-        return [
-            "نمایشگر باکیفیت",
-            product.name.match(/\d+gb/i)?.[0] || "حافظه متنوع",
-            "دستگاه کاربردی و حرفه‌ای"
-        ];
-
-    }
-
-    if (product.type === "laptop") {
-
-        return [
-            "پردازنده قدرتمند",
-            "حافظه ssd",
-            "نمایشگر باکیفیت"
         ];
 
     }
 
     return [
-        "گجت هوشمند",
-        "طراحی کاربردی",
-        "مناسب استفاده روزمره"
+        "مشخصات ثبت شده",
+        "اطلاعات فنی محصول",
+        "جزئیات بیشتر در پنجره مشخصات"
     ];
 
 }
 
+
+/*
+    ساخت کارت
+*/
 
 function createProductCard(product, index) {
 
@@ -2271,8 +3181,8 @@ function createProductCard(product, index) {
             data-brand="${product.brand}"
             data-type="${product.type}"
             data-name="${product.name}"
-            data-price="${product.price}"
-            data-new="${realProducts.length - index}">
+            data-new="${realProducts.length - index}"
+            data-product-index="${index}">
 
             <div class="product-top">
 
@@ -2336,19 +3246,16 @@ function createProductCard(product, index) {
 
             <div class="product-footer">
 
-                <div>
-
-                    <span class="price-label">
-                        قیمت
-                    </span>
-
-                    <div class="product-price">
-                        ${formatPrice(product.price)}
-                    </div>
-
-                </div>
-
                 <div class="product-actions">
+
+                    <button
+                        class="product-button more-specs"
+                        data-id="${id}"
+                        data-index="${index}">
+
+                        مشخصات بیشتر
+
+                    </button>
 
                     <button
                         class="favorite-button"
@@ -2499,7 +3406,6 @@ function filterProducts() {
 
     loadFavorites();
 
-
 }
 
 
@@ -2509,35 +3415,7 @@ function sortProducts(items) {
         sortFilter.value;
 
 
-    if (sort === "price-low") {
-
-        items.sort(function(a,b) {
-
-            return (
-                Number(a.dataset.price)
-                -
-                Number(b.dataset.price)
-            );
-
-        });
-
-    }
-
-    else if (sort === "price-high") {
-
-        items.sort(function(a,b) {
-
-            return (
-                Number(b.dataset.price)
-                -
-                Number(a.dataset.price)
-            );
-
-        });
-
-    }
-
-    else if (sort === "name") {
+    if (sort === "name") {
 
         items.sort(function(a,b) {
 
@@ -2685,6 +3563,12 @@ productsGrid.addEventListener(
             );
 
 
+        const moreSpecsButton =
+            event.target.closest(
+                ".more-specs"
+            );
+
+
         if (favoriteButton) {
 
             const id =
@@ -2777,6 +3661,118 @@ productsGrid.addEventListener(
                 );
 
             }
+
+        }
+
+
+        if (moreSpecsButton) {
+
+            const index =
+                Number(
+                    moreSpecsButton.dataset.index
+                );
+
+
+            const product =
+                realProducts[index];
+
+
+            if (product) {
+
+                showProductSpecs(
+                    product
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/*
+    نمایش مشخصات کامل
+*/
+
+function showProductSpecs(product) {
+
+    specModalTitle.textContent =
+        product.name;
+
+
+    specModalList.innerHTML =
+        (product.specs || [])
+        .map(function(spec) {
+
+            return `
+                <div class="full-spec-item">
+                    ${spec}
+                </div>
+            `;
+
+        })
+        .join("");
+
+
+    specModal.classList.add(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function closeSpecModal() {
+
+    specModal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+specModalClose.addEventListener(
+    "click",
+    closeSpecModal
+);
+
+
+specModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === specModal
+        ) {
+
+            closeSpecModal();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            specModal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeSpecModal();
 
         }
 
